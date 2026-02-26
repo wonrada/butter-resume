@@ -51,5 +51,5 @@ Built with: Next.js · Expo · Golang · Laravel · PostgreSQL · Claude AI · W
 ## Contact
 
 - GitHub: [github.com/wonrada](https://github.com/wonrada)
-- LinkedIn: [wonrada-ka-ungku](https://www.linkedin.com/in/wonrada-ka-ungku-b49327247/)
+- LinkedIn: [wonrada-ka-ungku](https://www.linkedin.com/in/wonrada-kaaungku-b49327247/)
 - Email: wonrada.k@gmail.com
