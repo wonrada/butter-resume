@@ -1,0 +1,1551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>butterMenu — by Wonrada Kaaungku "Noei" 🧈</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pink: #ffb3c6;
+        --pink-d: #ff85a1;
+        --pink-l: #fff0f5;
+        --yel: #fff3a3;
+        --yel-d: #ffe030;
+        --yel-l: #fffde8;
+        --mint: #edfff5;
+        --mint-d: #a8e6c4;
+        --lav: #f5f0ff;
+        --lav-d: #c5a0ff;
+        --org: #fff8ee;
+        --org-d: #ffd59e;
+        --cream: #fffdf6;
+        --white: #ffffff;
+        --text: #2c1a2e;
+        --soft: #9b7da0;
+        --line: #f2c4d0;
+        --butter1: #fbbf24;
+        --butter2: #f59e0b;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        cursor: none !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--cream);
+        font-family: "Nunito", sans-serif;
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      /* cursor */
+      #c-dot {
+        position: fixed;
+        z-index: 9999;
+        pointer-events: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--pink-d);
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.15s,
+          height 0.15s,
+          background 0.15s;
+        mix-blend-mode: multiply;
+      }
+      #c-ring {
+        position: fixed;
+        z-index: 9998;
+        pointer-events: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 2px solid var(--pink-d);
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+        transition: opacity 0.2s;
+      }
+      .spark {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9997;
+        transform: translate(-50%, -50%);
+        animation: sparkOut 0.82s ease forwards;
+      }
+      @keyframes sparkOut {
+        0% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, calc(-50% - 38px)) scale(0.2);
+        }
+      }
+
+      /* nav */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 253, 246, 0.95);
+        backdrop-filter: blur(16px);
+        border-bottom: 2px solid var(--line);
+        padding: 13px 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        font-family: "Caveat", cursive;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--pink-d);
+        text-decoration: none;
+      }
+      .back-btn {
+        font-family: "Nunito", sans-serif;
+        font-size: 0.84rem;
+        font-weight: 800;
+        background: var(--white);
+        color: var(--text);
+        border: 2px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 18px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 3px 3px 0 var(--line);
+        transition: all 0.2s;
+      }
+      .back-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 var(--pink-d);
+        border-color: var(--pink-d);
+      }
+
+      /* layout */
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 48px;
+      }
+      .wave-div {
+        height: 20px;
+        margin: 0 48px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16'%3E%3Cpath d='M0 8 Q10 2 20 8 Q30 14 40 8 Q50 2 60 8 Q70 14 80 8' stroke='%23F2C4D0' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+        background-repeat: repeat-x;
+        background-position: center;
+      }
+
+      /* tags */
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "Caveat", cursive;
+        font-size: 0.9rem;
+        font-weight: 700;
+        padding: 3px 13px;
+        border-radius: 999px;
+        border: 2px solid;
+        margin-bottom: 10px;
+      }
+      .t-pk {
+        background: var(--pink-l);
+        border-color: var(--pink);
+        color: var(--pink-d);
+      }
+      .t-yl {
+        background: var(--yel-l);
+        border-color: var(--yel-d);
+        color: #8b6a00;
+      }
+      .t-mn {
+        background: var(--mint);
+        border-color: var(--mint-d);
+        color: #2e7d52;
+      }
+      .t-lv {
+        background: var(--lav);
+        border-color: var(--lav-d);
+        color: #6b46c1;
+      }
+      .t-or {
+        background: var(--org);
+        border-color: var(--org-d);
+        color: #c05a00;
+      }
+      .sec-title {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        margin-bottom: 8px;
+      }
+      .sec-sub {
+        font-size: 0.93rem;
+        font-weight: 600;
+        color: var(--soft);
+        line-height: 1.75;
+        max-width: 520px;
+        margin-bottom: 36px;
+      }
+      .etag {
+        font-family: "Caveat", cursive;
+        font-size: 0.88rem;
+        font-weight: 700;
+        background: var(--pink-l);
+        border: 1.5px solid var(--pink);
+        border-radius: 8px;
+        padding: 1px 10px;
+        color: var(--pink-d);
+        display: inline-block;
+        margin: 2px 2px 2px 0;
+      }
+
+      /* hero */
+      #hero {
+        padding: 80px 0 60px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: 52px;
+        align-items: center;
+      }
+      .hero-eye {
+        font-family: "Caveat", cursive;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--soft);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .hero-eye::before {
+        content: "";
+        display: inline-block;
+        width: 26px;
+        height: 2px;
+        background: var(--pink-d);
+        border-radius: 2px;
+      }
+      .hero-title {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+      }
+      .hero-title .hl {
+        color: var(--pink-d);
+        font-style: italic;
+        position: relative;
+      }
+      .hero-title .hl::after {
+        content: "";
+        position: absolute;
+        left: -3px;
+        right: -3px;
+        bottom: 4px;
+        height: 10px;
+        background: var(--yel);
+        z-index: -1;
+        border-radius: 3px;
+        transform: rotate(-0.4deg);
+      }
+      .hero-sub {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--soft);
+        line-height: 1.8;
+        max-width: 440px;
+        margin-bottom: 24px;
+      }
+      .pitch-card {
+        background: var(--white);
+        border: 2px solid var(--line);
+        border-radius: 18px;
+        padding: 18px 22px;
+        margin-bottom: 24px;
+        box-shadow: 4px 4px 0 var(--line);
+        position: relative;
+      }
+      .pitch-label {
+        position: absolute;
+        top: -11px;
+        left: 18px;
+        background: var(--pink-l);
+        border: 2px solid var(--pink);
+        border-radius: 999px;
+        padding: 1px 12px;
+        font-family: "Caveat", cursive;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--pink-d);
+      }
+      .pitch-text {
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.8;
+      }
+      .tags-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* phone mockup */
+      .phone-wrap {
+        position: relative;
+        width: 185px;
+        height: 360px;
+        margin: 0 auto;
+      }
+      .blob-bg {
+        position: absolute;
+        inset: -14px;
+        background: linear-gradient(135deg, var(--pink-d), var(--yel));
+        border-radius: 60% 40% 55% 45%/50% 55% 45% 50%;
+        animation: blobMorph 8s ease-in-out infinite;
+        opacity: 0.2;
+        z-index: 0;
+      }
+      @keyframes blobMorph {
+        0%,
+        100% {
+          border-radius: 60% 40% 55% 45%/50% 55% 45% 50%;
+        }
+        33% {
+          border-radius: 45% 55% 40% 60%/55% 45% 60% 40%;
+        }
+        66% {
+          border-radius: 55% 45% 60% 40%/40% 60% 45% 55%;
+        }
+      }
+      .phone {
+        position: relative;
+        z-index: 1;
+        width: 185px;
+        height: 360px;
+        background: #1a1a1a;
+        border-radius: 36px;
+        padding: 10px 6px;
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.2),
+          inset 0 0 0 2px #333;
+      }
+      .phone-notch {
+        width: 70px;
+        height: 18px;
+        background: #1a1a1a;
+        border-radius: 10px;
+        margin: 0 auto 6px;
+        position: relative;
+        z-index: 2;
+      }
+      .phone-screen {
+        background: var(--cream);
+        border-radius: 24px;
+        height: 304px;
+        overflow: hidden;
+        padding: 8px;
+      }
+      .float-s {
+        position: absolute;
+        animation: floaty 3s ease-in-out infinite;
+        z-index: 2;
+      }
+      @keyframes floaty {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* sections */
+      section {
+        padding: 72px 0 52px;
+      }
+
+      /* case study */
+      .case-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .case-card {
+        background: var(--white);
+        border: 2.5px solid var(--line);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 4px 4px 0 var(--line);
+        transition: transform 0.2s;
+      }
+      .case-card:hover {
+        transform: translateY(-3px);
+      }
+      .case-icon {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+      .case-card h3 {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+      .case-card p {
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--soft);
+        line-height: 1.7;
+      }
+      .case-card.highlight {
+        background: linear-gradient(135deg, var(--mint), var(--yel-l));
+        border-color: var(--mint-d);
+        box-shadow: 4px 4px 0 var(--mint-d);
+      }
+      .decision-box {
+        background: linear-gradient(135deg, var(--pink-l), var(--yel-l));
+        border: 2.5px solid var(--line);
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 4px 4px 0 var(--line);
+        margin-top: 8px;
+      }
+      .decision-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1.5px dashed var(--line);
+      }
+      .decision-row:last-child {
+        border-bottom: none;
+      }
+      .decision-tag {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 0.82rem;
+        padding: 2px 10px;
+        border-radius: 999px;
+        border: 2px solid;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .d-do {
+        background: var(--mint);
+        border-color: var(--mint-d);
+        color: #2e7d52;
+      }
+      .d-dont {
+        background: var(--pink-l);
+        border-color: var(--pink);
+        color: var(--pink-d);
+      }
+      .decision-text {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--soft);
+        line-height: 1.65;
+      }
+      .decision-text strong {
+        color: var(--text);
+      }
+
+      /* build log */
+      .log-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+      .log-col {
+        border: 2.5px solid;
+        border-radius: 20px;
+        padding: 22px 20px;
+      }
+      .log-col.shipped {
+        background: var(--mint);
+        border-color: var(--mint-d);
+        box-shadow: 4px 4px 0 var(--mint-d);
+      }
+      .log-col.wip {
+        background: var(--pink-l);
+        border-color: var(--pink);
+        box-shadow: 4px 4px 0 var(--pink-d);
+      }
+      .log-col.next {
+        background: var(--yel-l);
+        border-color: var(--yel-d);
+        box-shadow: 4px 4px 0 #cca800;
+      }
+      .log-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .log-header span {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.05rem;
+      }
+      .log-item {
+        background: var(--white);
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-bottom: 7px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+      .log-item.shipped {
+        border: 1.5px solid var(--mint-d);
+      }
+      .log-item.wip {
+        border: 1.5px solid var(--pink);
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .log-item.next {
+        border: 1.5px solid var(--yel-d);
+        color: var(--soft);
+      }
+      .wip-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--pink-d);
+        flex-shrink: 0;
+        margin-top: 4px;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 133, 161, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 0 7px rgba(255, 133, 161, 0);
+        }
+      }
+      .log-note {
+        font-family: "Caveat", cursive;
+        font-size: 0.75rem;
+        color: #2e7d52;
+        font-weight: 700;
+        margin-top: 2px;
+      }
+      .live-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--mint);
+        border: 2px solid var(--mint-d);
+        border-radius: 12px;
+        padding: 10px 16px;
+        margin-bottom: 24px;
+        width: fit-content;
+      }
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #2e7d52;
+        animation: pulse 2s infinite;
+      }
+
+      /* roadmap */
+      .roadmap {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+      }
+      .roadmap::before {
+        content: "";
+        position: absolute;
+        left: 27px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(var(--pink), var(--mint-d), var(--org-d));
+        border-radius: 2px;
+        z-index: 0;
+      }
+      .phase-row {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 0 14px;
+        position: relative;
+        z-index: 1;
+      }
+      .phase-dot {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        background: var(--white);
+        flex-shrink: 0;
+        z-index: 2;
+      }
+      .phase-card {
+        border: 2.5px solid;
+        border-radius: 18px;
+        padding: 18px 22px;
+        transition: all 0.3s;
+      }
+      .ph1 .phase-dot {
+        border: 2.5px solid var(--pink-d);
+        box-shadow: 3px 3px 0 var(--pink-d);
+        animation: pulse 2s infinite;
+      }
+      .ph1 .phase-card {
+        background: linear-gradient(135deg, var(--pink-l), var(--cream));
+        border-color: var(--pink-d);
+        box-shadow: 4px 4px 0 var(--pink-d);
+      }
+      .ph2 .phase-dot {
+        border: 2.5px solid var(--lav-d);
+        box-shadow: 3px 3px 0 var(--lav-d);
+      }
+      .ph2 .phase-card {
+        background: var(--white);
+        border-color: var(--line);
+        box-shadow: 4px 4px 0 var(--line);
+      }
+      .ph3 .phase-dot {
+        border: 2.5px solid var(--mint-d);
+        box-shadow: 3px 3px 0 var(--mint-d);
+      }
+      .ph3 .phase-card {
+        background: var(--white);
+        border-color: var(--line);
+        box-shadow: 4px 4px 0 var(--line);
+      }
+      .ph4 .phase-dot {
+        border: 2.5px solid var(--org-d);
+        box-shadow: 3px 3px 0 var(--org-d);
+      }
+      .ph4 .phase-card {
+        background: var(--white);
+        border-color: var(--line);
+        box-shadow: 4px 4px 0 var(--line);
+      }
+      .phase-label {
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--soft);
+      }
+      .phase-title {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.05rem;
+        margin: 3px 0;
+      }
+      .phase-desc {
+        font-size: 0.83rem;
+        font-weight: 600;
+        color: var(--soft);
+        line-height: 1.6;
+      }
+      .phase-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "Caveat", cursive;
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 2px 10px;
+        border-radius: 999px;
+        border: 2px solid;
+        margin-top: 6px;
+      }
+
+      /* footer */
+      .footer-cta {
+        background: linear-gradient(135deg, var(--pink-l), var(--yel-l));
+        border: 2.5px solid var(--line);
+        border-radius: 24px;
+        padding: 44px 48px;
+        text-align: center;
+        box-shadow: 6px 6px 0 var(--line);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 80px;
+      }
+      .footer-cta::before {
+        content: "✿ ✦ ✿";
+        position: absolute;
+        top: 18px;
+        left: 24px;
+        font-size: 1rem;
+        opacity: 0.2;
+        color: var(--pink-d);
+        letter-spacing: 8px;
+      }
+      .footer-cta::after {
+        content: "✦ ✿ ✦";
+        position: absolute;
+        bottom: 18px;
+        right: 24px;
+        font-size: 1rem;
+        opacity: 0.2;
+        color: #8b6a00;
+        letter-spacing: 8px;
+      }
+      .footer-cta h2 {
+        font-family: "DM Serif Display", serif;
+        font-style: italic;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        margin-bottom: 10px;
+      }
+      .footer-cta p {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--soft);
+        max-width: 480px;
+        margin: 0 auto 24px;
+        line-height: 1.8;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-fill {
+        font-family: "Nunito", sans-serif;
+        font-size: 0.84rem;
+        font-weight: 800;
+        background: var(--pink-d);
+        color: #fff;
+        border: 2px solid var(--pink-d);
+        border-radius: 999px;
+        padding: 11px 24px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 3px 3px 0 #cc5070;
+        transition: all 0.2s;
+      }
+      .btn-fill:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 #cc5070;
+      }
+      .btn-out {
+        font-family: "Nunito", sans-serif;
+        font-size: 0.84rem;
+        font-weight: 800;
+        background: var(--white);
+        color: var(--text);
+        border: 2px solid var(--line);
+        border-radius: 999px;
+        padding: 11px 24px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 3px 3px 0 var(--line);
+        transition: all 0.2s;
+      }
+      .btn-out:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 var(--pink-d);
+        border-color: var(--pink-d);
+      }
+
+      footer {
+        text-align: center;
+        padding: 26px;
+        font-family: "Caveat", cursive;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--soft);
+        border-top: 2px solid var(--line);
+      }
+
+      /* ─── RESPONSIVE ─── */
+
+      /* Large tablet / small desktop  (861 – 1100px) */
+      @media (max-width: 1100px) {
+        nav { padding: 13px 36px; }
+        .wrap { padding: 0 36px; }
+        .wave-div { margin: 0 36px; }
+        .hero-grid { gap: 36px; }
+        .phone-wrap { width: 160px; height: 320px; }
+        .phone { width: 160px; height: 320px; }
+        .phone-screen { height: 268px; }
+      }
+
+      /* Tablet / iPad portrait  (≤ 860px) */
+      @media (max-width: 860px) {
+        nav { padding: 13px 24px; }
+        .wrap { padding: 0 24px; }
+        .wave-div { margin: 0 24px; }
+        .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+        .phone-wrap { display: none; }
+        .case-grid { grid-template-columns: 1fr; }
+        .log-grid { grid-template-columns: 1fr; }
+        .footer-cta { padding: 32px 24px; }
+        section { padding: 56px 0 40px; }
+        .roadmap::before { left: 24px; }
+        .phase-row { grid-template-columns: 50px 1fr; }
+        .phase-dot { width: 48px; height: 48px; font-size: 1.1rem; }
+      }
+
+      /* Large phone  (≤ 600px) */
+      @media (max-width: 600px) {
+        .cta-btns { flex-direction: column; align-items: center; }
+        .btn-fill, .btn-out { width: 100%; max-width: 300px; justify-content: center; }
+        .decision-row { flex-direction: column; gap: 6px; }
+        .decision-tag { align-self: flex-start; }
+        .log-col { padding: 18px 16px; }
+        .hero-title { font-size: clamp(2.6rem, 10vw, 4rem); }
+      }
+
+      /* Phone  (≤ 480px) */
+      @media (max-width: 480px) {
+        nav { padding: 12px 20px; }
+        .wrap { padding: 0 20px; }
+        .wave-div { margin: 0 20px; }
+        .footer-cta { padding: 28px 20px; }
+        section { padding: 44px 0 32px; }
+        .sec-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+        .sec-sub { font-size: .88rem; }
+        .phase-card { padding: 14px 16px; }
+        .phase-title { font-size: .98rem; }
+        .phase-desc { font-size: .8rem; }
+        .case-card { padding: 18px; }
+        .decision-box { padding: 20px; }
+        .roadmap { gap: 10px; }
+        .etag { font-size: .82rem; }
+      }
+
+      /* Small phone  (≤ 380px) */
+      @media (max-width: 380px) {
+        .hero-title { font-size: clamp(2.2rem, 12vw, 3rem); }
+        .phase-row { grid-template-columns: 44px 1fr; gap: 0 10px; }
+        .phase-dot { width: 44px; height: 44px; font-size: 1rem; }
+        .log-item { font-size: .78rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="c-dot"></div>
+    <div id="c-ring"></div>
+
+    <!-- NAV -->
+    <nav>
+      <a href="butterada.dev" class="nav-logo"><img src="favicon.svg" alt="butter" style="height:1.4em;vertical-align:middle;display:inline-block;"> butterMenu</a>
+      <a href="index.html" class="back-btn">← Back to Resume</a>
+    </nav>
+
+    <!-- ════ HERO ════ -->
+    <section id="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eye">Side Project · Building Now</div>
+            <h1 class="hero-title"><span class="hl">butter</span><br />Menu</h1>
+            <p class="hero-sub">
+              better menu — but made by butter (that's me 🧈). A food discovery
+              platform that started with one real problem: my mom's restaurant
+              has no website.
+            </p>
+
+            <div class="pitch-card">
+              <div class="pitch-label">The Pitch</div>
+              <p class="pitch-text">
+                "Every time I wanted to eat out, I had to guess. No menu online. No idea what's good.
+                <span style="color: var(--pink-d)"
+                  >At some point I stopped waiting for someone else to fix it. First restaurant? The one closest to home— my mom's!"</span
+                >
+              </p>
+            </div>
+
+            <div class="tags-row">
+              <span class="tag t-pk">🍜 Starts with mum's restaurant</span>
+              <span class="tag t-mn"
+                >🤖 AI from menu data — no users needed</span
+              >
+              <span class="tag t-or">🛒 Ordering to help mum's knee pain</span>
+            </div>
+          </div>
+
+          <!-- phone mockup -->
+          <div class="phone-wrap">
+            <div class="blob-bg"></div>
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 7px;
+                  "
+                >
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;Caveat&quot;, cursive;
+                        font-weight: 700;
+                        font-size: 0.76rem;
+                        color: var(--pink-d);
+                      "
+                    >
+                      🍜 ครัวแม่
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.55rem;
+                        color: var(--soft);
+                        font-weight: 600;
+                      "
+                    >
+                      Wiang Haeng · Open now
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      background: var(--pink-l);
+                      border: 1.5px solid var(--pink);
+                      border-radius: 999px;
+                      padding: 2px 7px;
+                      font-size: 0.55rem;
+                      font-family: &quot;Caveat&quot;, cursive;
+                      font-weight: 700;
+                      color: var(--pink-d);
+                    "
+                  >
+                    TH/EN
+                  </div>
+                </div>
+                <!-- AI btn -->
+                <div
+                  style="
+                    background: linear-gradient(
+                      135deg,
+                      var(--pink-l),
+                      var(--yel-l)
+                    );
+                    border: 1.5px solid var(--pink);
+                    border-radius: 9px;
+                    padding: 6px 9px;
+                    margin-bottom: 7px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span style="font-size: 1rem">🤖</span>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;Caveat&quot;, cursive;
+                        font-weight: 700;
+                        font-size: 0.68rem;
+                        color: var(--pink-d);
+                      "
+                    >
+                      ไม่รู้จะกินอะไร?
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.55rem;
+                        color: var(--soft);
+                        font-weight: 600;
+                      "
+                    >
+                      ให้ AI แนะนำจากเมนูนี้
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      margin-left: auto;
+                      background: var(--pink-d);
+                      border-radius: 6px;
+                      padding: 2px 7px;
+                      font-family: &quot;Caveat&quot;, cursive;
+                      font-weight: 700;
+                      font-size: 0.58rem;
+                      color: #fff;
+                    "
+                  >
+                    ลอง →
+                  </div>
+                </div>
+                <!-- items -->
+                <div style="background:#fff;border-radius:8px;padding:5px 7px;margin-bottom:4px;border:1.5px solid var(--line);display:flex;align-items:center;gap:5px;">
+                  <span style="font-size:1.15rem;flex-shrink:0">🍳</span>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">ข้าวผัดกะเพรา</div>
+                    <div style="font-size:0.53rem;color:var(--soft);font-weight:600;">Basil Fried Rice · 🌶️🌶️</div>
+                  </div>
+                  <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;color:var(--pink-d);flex-shrink:0;">฿65</div>
+                </div>
+                <div style="background:#fff;border-radius:8px;padding:5px 7px;margin-bottom:4px;border:1.5px solid var(--line);display:flex;align-items:center;gap:5px;">
+                  <span style="font-size:1.15rem;flex-shrink:0">🍲</span>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">ต้มยำกุ้ง</div>
+                    <div style="font-size:0.53rem;color:var(--soft);font-weight:600;">Spicy Shrimp Soup · 🌶️🌶️🌶️</div>
+                  </div>
+                  <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;color:var(--pink-d);flex-shrink:0;">฿120</div>
+                </div>
+                <div style="background:#fff;border-radius:8px;padding:5px 7px;margin-bottom:4px;border:1.5px solid var(--line);display:flex;align-items:center;gap:5px;">
+                  <span style="font-size:1.15rem;flex-shrink:0">🥢</span>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">ผัดไทย</div>
+                    <div style="font-size:0.53rem;color:var(--soft);font-weight:600;">Pad Thai · 🌶️</div>
+                  </div>
+                  <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;color:var(--pink-d);flex-shrink:0;">฿80</div>
+                </div>
+                <div style="background:#fff;border-radius:8px;padding:5px 7px;margin-bottom:4px;border:1.5px solid var(--line);display:flex;align-items:center;gap:5px;">
+                  <span style="font-size:1.15rem;flex-shrink:0">🥗</span>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">ส้มตำ</div>
+                    <div style="font-size:0.53rem;color:var(--soft);font-weight:600;">Papaya Salad · 🌶️🌶️🌶️</div>
+                  </div>
+                  <div style="font-family:'Caveat',cursive;font-weight:700;font-size:0.68rem;color:var(--pink-d);flex-shrink:0;">฿60</div>
+                </div>
+                <div
+                  style="
+                    text-align: center;
+                    margin-top: 5px;
+                    font-size: 0.52rem;
+                    font-family: &quot;Caveat&quot;, cursive;
+                    color: #c5a0c5;
+                    font-weight: 600;
+                  "
+                >
+                  Scan QR · No app needed ✿
+                </div>
+              </div>
+            </div>
+            <div
+              class="float-s"
+              style="
+                top: -14px;
+                right: -8px;
+                font-size: 1.6rem;
+                animation: spin 9s linear infinite;
+              "
+            >
+              ✿
+            </div>
+            <div
+              class="float-s"
+              style="bottom: -4px; left: -12px; font-size: 1.3rem"
+            >
+              ⭑
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-div"></div>
+
+    <!-- ════ CASE STUDY ════ -->
+    <section id="casestudy">
+      <div class="wrap">
+        <div class="tag t-pk">📋 Case Study</div>
+        <h2 class="sec-title">Why I built it this way</h2>
+        <p class="sec-sub">
+          Every decision here has a reason. This is what separates building a
+          product from building a feature.
+        </p>
+
+        <div class="case-grid">
+          <div class="case-card">
+            <div class="case-icon">😤</div>
+            <h3>The Problem I Had</h3>
+            <p>
+              I wanted to check a restaurant's menu before going. But most
+              places don't have a website. I'd scroll Google Maps reviews hoping
+              someone photographed the dish I wanted. It was annoying every
+              single time.
+            </p>
+          </div>
+          <div class="case-card">
+            <div class="case-icon">😓</div>
+            <h3>The Problem My Mum Had</h3>
+            <p>
+              She runs the restaurant alone. Foreign tourists can't read Thai
+              menus. She loses customers who give up. She has knee pain and
+              walks to every table to take orders. Two problems, both real, both
+              fixable.
+            </p>
+          </div>
+          <div class="case-card highlight">
+            <div class="case-icon">💡</div>
+            <h3>The Real Success Metric</h3>
+            <p>
+              Not DAU. Not revenue. Not conversion rate.<br /><br /><strong
+                >Mum walks less. Mum's knees hurt less.</strong
+              ><br /><br />If that happens — the product works. Everything else
+              is a bonus.
+            </p>
+          </div>
+          <div class="case-card">
+            <div class="case-icon">🗺️</div>
+            <h3>Why Start With One Restaurant</h3>
+            <p>
+              Cold start kills two-sided platforms. The fix: prove it works for
+              one real user first — then walk into any other restaurant with a
+              live demo. Mum's restaurant is the pitch, not just the prototype.
+            </p>
+          </div>
+        </div>
+
+        <!-- decision log -->
+        <div class="decision-box">
+          <div
+            style="
+              font-family: &quot;DM Serif Display&quot;, serif;
+              font-size: 1.2rem;
+              margin-bottom: 16px;
+            "
+          >
+            Product Decisions — and why
+          </div>
+
+          <div class="decision-row">
+            <span class="decision-tag d-do">✓ Build</span>
+            <div class="decision-text">
+              <strong>Ordering via QR before AI recommendations</strong> —
+              Because mum has knee pain. Reducing how much she walks is
+              immediate, measurable value. AI is cool but doesn't fix her knees.
+            </div>
+          </div>
+          <div class="decision-row">
+            <span class="decision-tag d-dont">✗ Skip</span>
+            <div class="decision-text">
+              <strong>Real-time payment processing</strong> — Adds friction and
+              complexity for zero extra value right now. Mum's customers pay
+              cash at the table. This can come later.
+            </div>
+          </div>
+          <div class="decision-row">
+            <span class="decision-tag d-do">✓ Build</span>
+            <div class="decision-text">
+              <strong>AI recommend from each restaurant's menu only</strong> —
+              Works with zero user history. Day one, a customer scans QR → gets
+              3 relevant dish suggestions. No cold start problem for the AI
+              feature.
+            </div>
+          </div>
+          <div class="decision-row">
+            <span class="decision-tag d-dont">✗ Skip</span>
+            <div class="decision-text">
+              <strong>Cross-restaurant discovery (Phase 1)</strong> —
+              Meaningless without restaurant data. Build supply first. Turn on
+              demand-side features when there's something to discover.
+            </div>
+          </div>
+          <div class="decision-row">
+            <span class="decision-tag d-do">✓ Build</span>
+            <div class="decision-text">
+              <strong>Pre-order for group bookings</strong> — Mum's restaurant
+              does catering for groups. They book in advance. Pre-order means
+              she knows exactly what to prepare, less waste, less stress.
+            </div>
+          </div>
+          <div class="decision-row">
+            <span class="decision-tag d-dont">✗ Skip</span>
+            <div class="decision-text">
+              <strong>Multi-tenant self-serve signup (Phase 1)</strong> — Phase
+              1 is one restaurant. Mum. I setup everything personally.
+              Self-serve comes when I have a live demo to show other
+              restaurants.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-div"></div>
+
+    <!-- ════ BUILD LOG ════ -->
+    <section id="buildlog">
+      <div class="wrap">
+        <div
+          style="
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+          "
+        >
+          <div>
+            <div class="tag t-pk">📋 Build Log</div>
+            <h2 class="sec-title">What's been built. What's next.</h2>
+            <p class="sec-sub" style="margin-bottom: 0">
+              Updated as features ship. A living record, not a pitch.
+            </p>
+          </div>
+          <div class="live-badge">
+            <div class="live-dot"></div>
+            <span
+              style="
+                font-family: &quot;Caveat&quot;, cursive;
+                font-weight: 700;
+                font-size: 0.88rem;
+                color: #2e7d52;
+              "
+              >Actively building</span
+            >
+          </div>
+        </div>
+
+        <div class="log-grid">
+          <div class="log-col shipped">
+            <div class="log-header">
+              <span style="font-size: 1.3rem">✅</span>
+              <span>Shipped</span>
+            </div>
+            <div style="text-align: center; padding: 20px 0">
+              <div style="font-size: 1.8rem; margin-bottom: 8px">🌱</div>
+              <p
+                style="
+                  font-family: &quot;Caveat&quot;, cursive;
+                  font-weight: 700;
+                  font-size: 0.88rem;
+                  color: var(--soft);
+                  line-height: 1.6;
+                "
+              >
+                Nothing shipped yet —<br />but that's about to change.
+              </p>
+            </div>
+          </div>
+
+          <div class="log-col wip">
+            <div class="log-header">
+              <span style="font-size: 1.3rem">🔨</span>
+              <span>In Progress</span>
+            </div>
+            <div class="log-item wip">
+              <div class="wip-dot"></div>
+              <div>
+                QR menu — bilingual TH/EN
+                <div class="log-note">building now</div>
+              </div>
+            </div>
+            <div class="log-item wip">
+              <div class="wip-dot"></div>
+              <div>
+                Admin dashboard — CRUD menu + image upload
+                <div class="log-note">building now</div>
+              </div>
+            </div>
+            <div class="log-item wip">
+              <div class="wip-dot"></div>
+              <div>
+                AI translation — Thai name → EN description
+                <div class="log-note">building now</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-col next">
+            <div class="log-header">
+              <span style="font-size: 1.3rem">⏳</span>
+              <span>Up Next</span>
+            </div>
+            <div class="log-item next">Table-side ordering via QR</div>
+            <div class="log-item next">Notify mum on phone (new order)</div>
+            <div class="log-item next">Pre-order for group bookings</div>
+            <div class="log-item next">AI dish recommendation</div>
+            <div class="log-item next">PDF export — printable menu</div>
+            <div class="log-item next">Multi-restaurant + subdomains</div>
+            <div class="log-item next">Public feedback + bug tracker</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-div"></div>
+
+    <!-- ════ ROADMAP ════ -->
+    <section id="roadmap">
+      <div class="wrap">
+        <div class="tag t-mn">🗺️ Roadmap</div>
+        <h2 class="sec-title">Supply first. Then demand.</h2>
+        <p class="sec-sub">
+          Cold start kills two-sided platforms. The fix: start with one
+          restaurant, prove it, then scale with a live demo in hand.
+        </p>
+
+        <div class="roadmap">
+          <div class="phase-row ph1">
+            <div class="phase-dot">🍜</div>
+            <div class="phase-card">
+              <div class="phase-label">Phase 1 · Now</div>
+              <div class="phase-title">One Restaurant. Prove It Works.</div>
+              <div class="phase-desc">
+                Mum's restaurant in Wiang Haeng. QR menu + AI recommend +
+                ordering. Real user, real problem, real feedback loop. No
+                pressure to scale yet.
+              </div>
+              <span
+                class="phase-status"
+                style="
+                  background: var(--pink-l);
+                  border-color: var(--pink);
+                  color: var(--pink-d);
+                "
+                >🔨 Building Now</span
+              >
+            </div>
+          </div>
+          <div class="phase-row ph2">
+            <div class="phase-dot">🏪</div>
+            <div class="phase-card">
+              <div class="phase-label">Phase 2 · After validation</div>
+              <div class="phase-title">Open to Any Restaurant.</div>
+              <div class="phase-desc">
+                Walk into restaurants in Pai and Chiang Mai with a live demo —
+                mum's page. Self-serve signup. Every restaurant gets their own
+                subdomain and AI recommender.
+              </div>
+              <span
+                class="phase-status"
+                style="
+                  background: var(--lav);
+                  border-color: var(--lav-d);
+                  color: #6b46c1;
+                "
+                >📋 Planned</span
+              >
+            </div>
+          </div>
+          <div class="phase-row ph3">
+            <div class="phase-dot">✨</div>
+            <div class="phase-card">
+              <div class="phase-label">Phase 3 · When restaurants exist</div>
+              <div class="phase-title">Food Discovery for Users.</div>
+              <div class="phase-desc">
+                "What should I eat today?" — now we have real menus from real
+                restaurants. AI recommends across the platform. Browse menus
+                before you go. User accounts + taste profiles.
+              </div>
+              <span
+                class="phase-status"
+                style="
+                  background: var(--mint);
+                  border-color: var(--mint-d);
+                  color: #2e7d52;
+                "
+                >💡 Vision</span
+              >
+            </div>
+          </div>
+          <div class="phase-row ph4">
+            <div class="phase-dot">🛒</div>
+            <div class="phase-card">
+              <div class="phase-label">Phase 4 · Future</div>
+              <div class="phase-title">
+                Order from the Table. Order Before You Arrive.
+              </div>
+              <div class="phase-desc">
+                Full ordering flow for restaurants that need it. Pre-order as a
+                member. PromptPay + card. Kitchen display system. By this phase
+                — users trust the platform.
+              </div>
+              <span
+                class="phase-status"
+                style="
+                  background: var(--org);
+                  border-color: var(--org-d);
+                  color: #c05a00;
+                "
+                >💡 Vision</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-div"></div>
+
+    <!-- ════ STACK ════ -->
+    <section id="stack">
+      <div class="wrap">
+        <div class="tag t-yl">⭑ Tech Stack</div>
+        <h2 class="sec-title">Built to scale from day one</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px">
+          <div style="display:flex;align-items:center;gap:10px;background:#f4f4f4;border:2px solid #1a1a1a22;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #1a1a1a22;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">▲</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#1a1a1a">Next.js</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Frontend</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#EEEEFF;border:2px solid #5566FF22;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #5566FF22;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">⚛</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#5566FF">Expo</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Mobile</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#E6F9FF;border:2px solid #00ACD722;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #00ACD722;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">🐹</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#00ACD7">Golang</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Backend Phase 3+</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#FFF4F0;border:2px solid #CC785C22;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #CC785C22;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">🤖</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#CC785C">Claude AI</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Translation + Recs</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#EEF4FF;border:2px solid #33679122;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #33679122;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">🐘</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#336791">PostgreSQL</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Database</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#FFFDE8;border:2px solid #F59E0B22;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #F59E0B22;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">⚡</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#F59E0B">WebSocket</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Real-time orders</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#EEF6FF;border:2px solid #2496ED22;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #2496ED22;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">🐳</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#2496ED">Docker</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Infra</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#EDFFF5;border:2px solid #00B09B22;border-radius:14px;padding:10px 16px;box-shadow:3px 3px 0 #00B09B22;transition:transform .2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <span style="font-size:1.2rem">💳</span>
+            <div>
+              <div style="font-family:'Caveat',cursive;font-weight:700;font-size:.95rem;color:#00B09B">PromptPay</div>
+              <div style="font-size:0.68rem;font-weight:600;color:var(--soft)">Payments Phase 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-div"></div>
+
+    <!-- ════ FOOTER CTA ════ -->
+    <section>
+      <div class="wrap">
+        <div class="footer-cta">
+          <h2>Want to see more? 🌸</h2>
+          <p>
+            butterMenu is being built in public. If you're a recruiter,
+            potential collaborator, or just curious — I'd love to talk about
+            what I'm building and why.
+          </p>
+          <div class="cta-btns">
+            <a href="index.html" class="btn-fill">← Back to Resume</a>
+            <a href="mailto:wonrada.k@gmail.com" class="btn-out"
+              >📧 Say Hello</a
+            >
+            <a href="https://github.com/wonrada" class="btn-out" target="_blank"
+              >🐙 GitHub</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>Made with 💖 by Wonrada Kaaungku · "Noei" in Thai, "Butter" internationally <img src="favicon.svg" alt="butter" style="height:1.1em;vertical-align:middle;display:inline-block;"> · butterada.dev</footer>
+
+    <script>
+      const dot = document.getElementById("c-dot");
+      const ring = document.getElementById("c-ring");
+      const SYMS = ["✿", "✦", "⭑", "❋", "🌸", "◈", "🧈"];
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0,
+        lastSpark = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+      (function loop() {
+        dot.style.left = mx + "px";
+        dot.style.top = my + "px";
+        rx += (mx - rx) * 0.13;
+        ry += (my - ry) * 0.13;
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(loop);
+      })();
+
+      document.addEventListener("mousemove", (e) => {
+        const now = Date.now();
+        if (now - lastSpark > 72) {
+          lastSpark = now;
+          spark(e.clientX, e.clientY);
+        }
+      });
+      function spark(x, y) {
+        const s = document.createElement("div");
+        s.className = "spark";
+        s.textContent = SYMS[Math.floor(Math.random() * SYMS.length)];
+        s.style.cssText = `position:fixed;pointer-events:none;z-index:9997;left:${x + (Math.random() - 0.5) * 16}px;top:${y + (Math.random() - 0.5) * 16}px;font-size:${0.65 + Math.random() * 0.55}rem;transform:translate(-50%,-50%);animation:sparkOut .82s ease forwards`;
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 820);
+      }
+      document.addEventListener("click", (e) => {
+        for (let i = 0; i < 7; i++)
+          setTimeout(() => spark(e.clientX, e.clientY), i * 40);
+      });
+      document.querySelectorAll("a,button").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          dot.style.width = "16px";
+          dot.style.height = "16px";
+          dot.style.background = "#FF5C87";
+        });
+        el.addEventListener("mouseleave", () => {
+          dot.style.width = "10px";
+          dot.style.height = "10px";
+          dot.style.background = "var(--pink-d)";
+        });
+      });
+    </script>
+  </body>
+</html>
