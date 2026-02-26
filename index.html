@@ -1,1078 +1,1915 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Wonrada Kaaungku "Noei" — Full-Stack Developer 🧈</title>
-        <link rel="icon" type="image/svg+xml" href="favicon.svg">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600;700;800;900&display=swap"
-            rel="stylesheet">
-        <style>
-:root {
-  --pink:   #FFB3C6;
-  --pink-d: #FF85A1;
-  --pink-l: #FFF0F5;
-  --yel:    #FFF3A3;
-  --yel-d:  #FFE030;
-  --yel-l:  #FFFDE8;
-  --mint:   #EDFFF5;
-  --mint-d: #A8E6C4;
-  --lav:    #F5F0FF;
-  --lav-d:  #C5A0FF;
-  --cream:  #FFFDF6;
-  --white:  #FFFFFF;
-  --text:   #2C1A2E;
-  --soft:   #9B7DA0;
-  --line:   #F2C4D0;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wonrada Kaaungku "Noei" — Full-Stack Developer 🧈</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pink: #ffb3c6;
+        --pink-d: #ff85a1;
+        --pink-l: #fff0f5;
+        --yel: #fff3a3;
+        --yel-d: #ffe030;
+        --yel-l: #fffde8;
+        --mint: #edfff5;
+        --mint-d: #a8e6c4;
+        --lav: #f5f0ff;
+        --lav-d: #c5a0ff;
+        --cream: #fffdf6;
+        --white: #ffffff;
+        --text: #2c1a2e;
+        --soft: #9b7da0;
+        --line: #f2c4d0;
+      }
 
-* { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
-html { scroll-behavior: smooth; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        cursor: none !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
 
-body {
-  background: var(--cream);
-  font-family: 'Nunito', sans-serif;
-  color: var(--text);
-  overflow-x: hidden;
-}
+      body {
+        background: var(--cream);
+        font-family: "Nunito", sans-serif;
+        color: var(--text);
+        overflow-x: hidden;
+      }
 
-/* ─── CURSOR ─── */
-#c-dot {
-  position: fixed; z-index: 9999; pointer-events: none;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--pink-d);
-  left: -100px; top: -100px;
-  transform: translate(-50%, -50%);
-  transition: width .15s, height .15s, background .15s;
-}
-#c-ring {
-  position: fixed; z-index: 9998; pointer-events: none;
-  width: 34px; height: 34px; border-radius: 50%;
-  border: 2px solid var(--pink-d);
-  left: -100px; top: -100px;
-  transform: translate(-50%, -50%);
-  opacity: .6;
-}
-.spark {
-  position: fixed; z-index: 9997; pointer-events: none;
-  font-size: .9rem; line-height: 1;
-  transform: translate(-50%, -50%);
-  animation: sparkOut .8s ease forwards;
-}
-@keyframes sparkOut {
-  0%   { opacity: 1; transform: translate(-50%,-50%) scale(1) rotate(0deg); }
-  100% { opacity: 0; transform: translate(-50%, calc(-50% - 38px)) scale(.25) rotate(140deg); }
-}
+      /* ─── CURSOR ─── */
+      #c-dot {
+        position: fixed;
+        z-index: 9999;
+        pointer-events: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--pink-d);
+        left: -100px;
+        top: -100px;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.15s,
+          height 0.15s,
+          background 0.15s;
+      }
+      #c-ring {
+        position: fixed;
+        z-index: 9998;
+        pointer-events: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 2px solid var(--pink-d);
+        left: -100px;
+        top: -100px;
+        transform: translate(-50%, -50%);
+        opacity: 0.6;
+      }
+      .spark {
+        position: fixed;
+        z-index: 9997;
+        pointer-events: none;
+        font-size: 0.9rem;
+        line-height: 1;
+        transform: translate(-50%, -50%);
+        animation: sparkOut 0.8s ease forwards;
+      }
+      @keyframes sparkOut {
+        0% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, calc(-50% - 38px)) scale(0.25)
+            rotate(140deg);
+        }
+      }
 
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 15px 52px;
-  background: rgba(255,253,246,.94);
-  backdrop-filter: blur(14px);
-  border-bottom: 2px solid var(--line);
-}
-.logo {
-  font-family: 'Caveat', cursive; font-size: 1.5rem; font-weight: 700;
-  color: var(--pink-d); text-decoration: none;
-}
-.nav-links { display: flex; gap: 26px; list-style: none; }
-.nav-links a {
-  font-family: 'Caveat', cursive; font-size: 1.05rem; font-weight: 600;
-  color: var(--soft); text-decoration: none; transition: color .2s;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--pink-d); }
+      /* ─── NAV ─── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 500;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 52px;
+        background: rgba(255, 253, 246, 0.94);
+        backdrop-filter: blur(14px);
+        border-bottom: 2px solid var(--line);
+      }
+      .logo {
+        font-family: "Caveat", cursive;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--pink-d);
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 26px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-family: "Caveat", cursive;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--soft);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--pink-d);
+      }
 
-/* ─── LAYOUT ─── */
-.wrap { max-width: 1100px; margin: 0 auto; padding: 0 52px; }
+      /* ─── LAYOUT ─── */
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 52px;
+      }
 
-.wave-div {
-  height: 20px; margin: 0 52px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16'%3E%3Cpath d='M0 8 Q10 2 20 8 Q30 14 40 8 Q50 2 60 8 Q70 14 80 8' stroke='%23F2C4D0' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x center;
-}
+      .wave-div {
+        height: 20px;
+        margin: 0 52px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='16'%3E%3Cpath d='M0 8 Q10 2 20 8 Q30 14 40 8 Q50 2 60 8 Q70 14 80 8' stroke='%23F2C4D0' stroke-width='2' fill='none'/%3E%3C/svg%3E")
+          repeat-x center;
+      }
 
-/* ─── PILL TAG ─── */
-.tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 700;
-  padding: 4px 16px; border-radius: 999px; border: 2px solid;
-  margin-bottom: 12px;
-}
-.t-pk { background: var(--pink-l); border-color: var(--pink); color: var(--pink-d); }
-.t-yl { background: var(--yel-l);  border-color: var(--yel-d); color: #8B6A00; }
-.t-mn { background: var(--mint);   border-color: var(--mint-d); color: #2E7D52; }
+      /* ─── PILL TAG ─── */
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: "Caveat", cursive;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 4px 16px;
+        border-radius: 999px;
+        border: 2px solid;
+        margin-bottom: 12px;
+      }
+      .t-pk {
+        background: var(--pink-l);
+        border-color: var(--pink);
+        color: var(--pink-d);
+      }
+      .t-yl {
+        background: var(--yel-l);
+        border-color: var(--yel-d);
+        color: #8b6a00;
+      }
+      .t-mn {
+        background: var(--mint);
+        border-color: var(--mint-d);
+        color: #2e7d52;
+      }
 
-.sec-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem,4.5vw,3rem); line-height: 1.1; margin-bottom: 8px; }
-.sec-sub   { font-size: .95rem; font-weight: 600; color: var(--soft); max-width: 520px; line-height: 1.7; margin-bottom: 40px; }
+      .sec-title {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 8px;
+      }
+      .sec-sub {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--soft);
+        max-width: 520px;
+        line-height: 1.7;
+        margin-bottom: 40px;
+      }
 
-/* ─── HERO ─── */
-#hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  align-items: center;
-  gap: 48px;
-  max-width: 1100px; margin: 0 auto;
-  padding: 110px 52px 60px;
-}
+      /* ─── HERO ─── */
+      #hero {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        align-items: center;
+        gap: 48px;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 110px 52px 60px;
+      }
 
-.hero-eye {
-  font-family: 'Caveat', cursive; font-size: 1.15rem; font-weight: 600;
-  color: var(--soft); display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
-}
-.hero-eye::before { content: ''; width: 28px; height: 2px; background: var(--pink-d); border-radius: 2px; }
+      .hero-eye {
+        font-family: "Caveat", cursive;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--soft);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .hero-eye::before {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: var(--pink-d);
+        border-radius: 2px;
+      }
 
-.hero-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(3.5rem, 8vw, 6.5rem);
-  line-height: .95; letter-spacing: -.02em; margin-bottom: 14px;
-}
-.hero-name .hl {
-  font-style: italic; color: var(--pink-d); position: relative;
-}
-.hero-name .hl::after {
-  content: ''; position: absolute; left: -4px; right: -4px; bottom: 5px;
-  height: 10px; background: var(--yel); z-index: -1; border-radius: 4px;
-  transform: rotate(-.8deg);
-}
+      .hero-name {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(3.5rem, 8vw, 6.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        margin-bottom: 14px;
+      }
+      .hero-name .hl {
+        font-style: italic;
+        color: var(--pink-d);
+        position: relative;
+      }
+      .hero-name .hl::after {
+        content: "";
+        position: absolute;
+        left: -4px;
+        right: -4px;
+        bottom: 5px;
+        height: 10px;
+        background: var(--yel);
+        z-index: -1;
+        border-radius: 4px;
+        transform: rotate(-0.8deg);
+      }
 
-.hero-role { font-family: 'Caveat', cursive; font-size: 1.25rem; font-weight: 600; color: var(--soft); margin-bottom: 18px; }
-.hero-desc { font-size: 1rem; font-weight: 600; line-height: 1.8; max-width: 480px; margin-bottom: 26px; }
+      .hero-role {
+        font-family: "Caveat", cursive;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--soft);
+        margin-bottom: 18px;
+      }
+      .hero-desc {
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.8;
+        max-width: 480px;
+        margin-bottom: 26px;
+      }
 
-.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
-.pill {
-  font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 700;
-  padding: 4px 14px; border-radius: 999px;
-  border: 2px solid var(--line); background: var(--white); color: var(--soft);
-  transition: all .2s;
-}
-.pill:hover { background: var(--pink); border-color: var(--pink-d); color: var(--text); transform: translateY(-3px) rotate(-2deg); }
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 32px;
+      }
+      .pill {
+        font-family: "Caveat", cursive;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 999px;
+        border: 2px solid var(--line);
+        background: var(--white);
+        color: var(--soft);
+        transition: all 0.2s;
+      }
+      .pill:hover {
+        background: var(--pink);
+        border-color: var(--pink-d);
+        color: var(--text);
+        transform: translateY(-3px) rotate(-2deg);
+      }
 
-.btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-fill {
-  font-family: 'Nunito', sans-serif; font-size: .88rem; font-weight: 800;
-  padding: 12px 26px; border-radius: 999px;
-  background: var(--pink-d); color: #fff; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 7px;
-  box-shadow: 0 4px 16px #FFB3C660, 4px 4px 0 #D9607A;
-  transition: all .2s;
-}
-.btn-fill:hover { transform: translate(-2px,-2px); box-shadow: 0 8px 22px #FFB3C670, 6px 6px 0 #D9607A; }
-.btn-out {
-  font-family: 'Nunito', sans-serif; font-size: .88rem; font-weight: 800;
-  padding: 12px 26px; border-radius: 999px;
-  background: var(--white); color: var(--text); text-decoration: none;
-  display: inline-flex; align-items: center; gap: 7px;
-  border: 2px solid var(--line); box-shadow: 4px 4px 0 var(--line);
-  transition: all .2s;
-}
-.btn-out:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--pink-d); border-color: var(--pink-d); }
+      .btns {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn-fill {
+        font-family: "Nunito", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 800;
+        padding: 12px 26px;
+        border-radius: 999px;
+        background: var(--pink-d);
+        color: #fff;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        box-shadow:
+          0 4px 16px #ffb3c660,
+          4px 4px 0 #d9607a;
+        transition: all 0.2s;
+      }
+      .btn-fill:hover {
+        transform: translate(-2px, -2px);
+        box-shadow:
+          0 8px 22px #ffb3c670,
+          6px 6px 0 #d9607a;
+      }
+      .btn-out {
+        font-family: "Nunito", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 800;
+        padding: 12px 26px;
+        border-radius: 999px;
+        background: var(--white);
+        color: var(--text);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 2px solid var(--line);
+        box-shadow: 4px 4px 0 var(--line);
+        transition: all 0.2s;
+      }
+      .btn-out:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--pink-d);
+        border-color: var(--pink-d);
+      }
 
-/* hero right */
-.hero-r { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.blob-wrap { width: 290px; height: 330px; position: relative; }
-.blob-bg {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, var(--pink), var(--yel));
-  border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
-  animation: blobMorph 8s ease-in-out infinite;
-}
-.blob-in {
-  position: absolute; inset: 13px;
-  background: var(--cream);
-  border-radius: 58% 42% 53% 47% / 48% 53% 47% 52%;
-  animation: blobMorph 8s 1s ease-in-out infinite;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 5rem; overflow: hidden;
-}
-.blob-in img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
-.blob-s1 { position: absolute; top: -12px; right: -12px; font-size: 2rem; animation: spin 8s linear infinite; }
-.blob-s2 { position: absolute; bottom: -8px; left: -8px; font-size: 1.5rem; animation: floaty 3s ease-in-out infinite; }
-@keyframes blobMorph {
-  0%,100% { border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%; }
-  33%      { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
-  66%      { border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%; }
-}
-@keyframes spin   { to { transform: rotate(360deg); } }
-@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+      /* hero right */
+      .hero-r {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .blob-wrap {
+        width: 290px;
+        height: 330px;
+        position: relative;
+      }
+      .blob-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--pink), var(--yel));
+        border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+        animation: blobMorph 8s ease-in-out infinite;
+      }
+      .blob-in {
+        position: absolute;
+        inset: 13px;
+        background: var(--cream);
+        border-radius: 58% 42% 53% 47% / 48% 53% 47% 52%;
+        animation: blobMorph 8s 1s ease-in-out infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        overflow: hidden;
+      }
+      .blob-in img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+      }
+      .blob-s1 {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        font-size: 2rem;
+        animation: spin 8s linear infinite;
+      }
+      .blob-s2 {
+        position: absolute;
+        bottom: -8px;
+        left: -8px;
+        font-size: 1.5rem;
+        animation: floaty 3s ease-in-out infinite;
+      }
+      @keyframes blobMorph {
+        0%,
+        100% {
+          border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+        }
+        33% {
+          border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
+        }
+        66% {
+          border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%;
+        }
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes floaty {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-9px);
+        }
+      }
 
-.stats { display: flex; gap: 10px; }
-.stat-card {
-  background: var(--white); border: 2px solid var(--line); border-radius: 16px;
-  padding: 11px 15px; text-align: center; box-shadow: 3px 3px 0 var(--line); transition: all .2s;
-}
-.stat-card:hover { transform: translate(-2px,-2px); }
-.stat-card:nth-child(1) { background: var(--yel-l);  border-color: var(--yel-d);  box-shadow: 3px 3px 0 #cca800; }
-.stat-card:nth-child(2) { background: var(--pink-l); border-color: var(--pink);   box-shadow: 3px 3px 0 var(--pink-d); }
-.stat-n { font-family: 'DM Serif Display', serif; font-size: 1.65rem; }
-.stat-l { font-family: 'Caveat', cursive; font-size: .8rem; color: var(--soft); }
+      .stats {
+        display: flex;
+        gap: 10px;
+      }
+      .stat-card {
+        background: var(--white);
+        border: 2px solid var(--line);
+        border-radius: 16px;
+        padding: 11px 15px;
+        text-align: center;
+        box-shadow: 3px 3px 0 var(--line);
+        transition: all 0.2s;
+      }
+      .stat-card:hover {
+        transform: translate(-2px, -2px);
+      }
+      .stat-card:nth-child(1) {
+        background: var(--yel-l);
+        border-color: var(--yel-d);
+        box-shadow: 3px 3px 0 #cca800;
+      }
+      .stat-card:nth-child(2) {
+        background: var(--pink-l);
+        border-color: var(--pink);
+        box-shadow: 3px 3px 0 var(--pink-d);
+      }
+      .stat-n {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.65rem;
+      }
+      .stat-l {
+        font-family: "Caveat", cursive;
+        font-size: 0.8rem;
+        color: var(--soft);
+      }
 
-/* ─── EXPERIENCE ─── */
-#experience { padding: 80px 0 60px; }
+      /* ─── EXPERIENCE ─── */
+      #experience {
+        padding: 80px 0 60px;
+      }
 
-.timeline { display: flex; flex-direction: column; gap: 14px; }
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
 
-.exp-row {
-  display: grid; grid-template-columns: 52px 1fr; gap: 0 16px; position: relative;
-}
-.exp-row:not(:last-child)::after {
-  content: ''; position: absolute; left: 25px; top: 52px; bottom: -14px; width: 2px;
-  background: linear-gradient(var(--line), transparent);
-}
-.exp-icon {
-  width: 50px; height: 50px; border-radius: 50%;
-  background: var(--white); border: 2px solid var(--line);
-  display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
-  flex-shrink: 0; z-index: 1; box-shadow: 3px 3px 0 var(--line);
-  transition: transform .25s;
-}
+      .exp-row {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 0 16px;
+        position: relative;
+      }
+      .exp-row:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 25px;
+        top: 52px;
+        bottom: -14px;
+        width: 2px;
+        background: linear-gradient(var(--line), transparent);
+      }
+      .exp-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 2px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        z-index: 1;
+        box-shadow: 3px 3px 0 var(--line);
+        transition: transform 0.25s;
+      }
 
-/* accordion card */
-.exp-card {
-  background: var(--white); border: 2px solid var(--line); border-radius: 18px;
-  overflow: hidden; box-shadow: 4px 4px 0 var(--line);
-  transition: box-shadow .2s, transform .2s;
-  position: relative;
-}
-.exp-card::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-  background: linear-gradient(var(--pink-d), var(--yel-d));
-}
-.exp-card.star { border-color: var(--pink-d); box-shadow: 4px 4px 0 var(--pink-d); }
+      /* accordion card */
+      .exp-card {
+        background: var(--white);
+        border: 2px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 4px 4px 0 var(--line);
+        transition:
+          box-shadow 0.2s,
+          transform 0.2s;
+        position: relative;
+      }
+      .exp-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(var(--pink-d), var(--yel-d));
+      }
+      .exp-card.star {
+        border-color: var(--pink-d);
+        box-shadow: 4px 4px 0 var(--pink-d);
+      }
 
-.exp-header {
-  padding: 16px 20px; display: flex; align-items: center; gap: 12px;
-  transition: background .2s;
-}
-.exp-header:hover { background: #FFF8FA; }
-.exp-card.star .exp-header:hover { background: #FFF3F7; }
+      .exp-header {
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: background 0.2s;
+      }
+      .exp-header:hover {
+        background: #fff8fa;
+      }
+      .exp-card.star .exp-header:hover {
+        background: #fff3f7;
+      }
 
-.exp-header-left { flex: 1; min-width: 0; }
-.exp-role { font-size: .92rem; font-weight: 900; }
-.exp-co   { font-family: 'Caveat', cursive; font-size: .98rem; font-weight: 700; color: var(--pink-d); margin-top: 1px; }
-.exp-short { font-size: .82rem; font-weight: 600; color: var(--soft); margin-top: 5px; line-height: 1.5; }
+      .exp-header-left {
+        flex: 1;
+        min-width: 0;
+      }
+      .exp-role {
+        font-size: 0.92rem;
+        font-weight: 900;
+      }
+      .exp-co {
+        font-family: "Caveat", cursive;
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: var(--pink-d);
+        margin-top: 1px;
+      }
+      .exp-short {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--soft);
+        margin-top: 5px;
+        line-height: 1.5;
+      }
 
-.exp-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.exp-period {
-  font-family: 'Caveat', cursive; font-size: .88rem; font-weight: 700;
-  background: var(--yel-l); border: 2px solid var(--yel-d); border-radius: 999px;
-  padding: 2px 12px; color: #8B6A00; white-space: nowrap;
-}
-.exp-chevron {
-  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-  background: var(--pink-l); border: 2px solid var(--pink);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .7rem; transition: all .3s; color: var(--pink-d); font-weight: 700;
-}
-.exp-row.open .exp-chevron { transform: rotate(180deg); background: var(--pink-d); color: #fff; border-color: var(--pink-d); }
-.exp-row.open .exp-icon { transform: rotate(12deg) scale(1.08); }
+      .exp-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      .exp-period {
+        font-family: "Caveat", cursive;
+        font-size: 0.88rem;
+        font-weight: 700;
+        background: var(--yel-l);
+        border: 2px solid var(--yel-d);
+        border-radius: 999px;
+        padding: 2px 12px;
+        color: #8b6a00;
+        white-space: nowrap;
+      }
+      .exp-chevron {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: var(--pink-l);
+        border: 2px solid var(--pink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        transition: all 0.3s;
+        color: var(--pink-d);
+        font-weight: 700;
+      }
+      .exp-row.open .exp-chevron {
+        transform: rotate(180deg);
+        background: var(--pink-d);
+        color: #fff;
+        border-color: var(--pink-d);
+      }
+      .exp-row.open .exp-icon {
+        transform: rotate(12deg) scale(1.08);
+      }
 
-/* accordion body */
-.exp-body {
-  max-height: 0; overflow: hidden;
-  transition: max-height .45s ease;
-}
-.exp-row.open .exp-body { max-height: 800px; }
+      /* accordion body */
+      .exp-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s ease;
+      }
+      .exp-row.open .exp-body {
+        max-height: 800px;
+      }
 
-.exp-body-inner {
-  padding: 0 20px 18px;
-  border-top: 1.5px dashed var(--line);
-  margin: 0 4px;
-}
-.exp-full { font-size: .84rem; font-weight: 600; color: var(--soft); line-height: 1.7; padding-top: 12px; }
+      .exp-body-inner {
+        padding: 0 20px 18px;
+        border-top: 1.5px dashed var(--line);
+        margin: 0 4px;
+      }
+      .exp-full {
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--soft);
+        line-height: 1.7;
+        padding-top: 12px;
+      }
 
-.sys-cards { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
-.sys-card {
-  border-radius: 12px; padding: 11px 14px; border: 1.5px solid;
-}
-.sys-card.pink  { background: var(--pink-l); border-color: var(--pink); }
-.sys-card.yel   { background: var(--yel-l);  border-color: var(--yel-d); }
-.sys-card.mint  { background: var(--mint);   border-color: var(--mint-d); }
-.sys-card-title { font-size: .86rem; font-weight: 900; margin-bottom: 4px; }
-.sys-card-desc  { font-size: .8rem; font-weight: 600; color: var(--soft); line-height: 1.6; }
+      .sys-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      .sys-card {
+        border-radius: 12px;
+        padding: 11px 14px;
+        border: 1.5px solid;
+      }
+      .sys-card.pink {
+        background: var(--pink-l);
+        border-color: var(--pink);
+      }
+      .sys-card.yel {
+        background: var(--yel-l);
+        border-color: var(--yel-d);
+      }
+      .sys-card.mint {
+        background: var(--mint);
+        border-color: var(--mint-d);
+      }
+      .sys-card-title {
+        font-size: 0.86rem;
+        font-weight: 900;
+        margin-bottom: 4px;
+      }
+      .sys-card-desc {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--soft);
+        line-height: 1.6;
+      }
 
-.exp-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-.etag {
-  font-family: 'Caveat', cursive; font-size: .88rem; font-weight: 700;
-  background: var(--pink-l); border: 1.5px solid var(--pink); border-radius: 8px;
-  padding: 1px 10px; color: var(--pink-d);
-}
+      .exp-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+      }
+      .etag {
+        font-family: "Caveat", cursive;
+        font-size: 0.88rem;
+        font-weight: 700;
+        background: var(--pink-l);
+        border: 1.5px solid var(--pink);
+        border-radius: 8px;
+        padding: 1px 10px;
+        color: var(--pink-d);
+      }
 
-/* ─── TECH ─── */
-#techstack { padding: 60px 0; }
-.tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(106px, 1fr)); gap: 11px; }
-.tc {
-  background: var(--white); border: 2px solid var(--line); border-radius: 16px;
-  padding: 15px 8px; text-align: center; box-shadow: 3px 3px 0 var(--line);
-  transition: all .2s;
-}
-.tc:hover { transform: translateY(-5px) rotate(-3deg); box-shadow: 5px 7px 0 var(--line); }
-.tc:nth-child(even):hover { transform: translateY(-5px) rotate(3deg); }
-.tc-i { font-size: 1.75rem; margin-bottom: 6px; }
-.tc-n { font-family: 'Caveat', cursive; font-size: .9rem; font-weight: 700; }
-.c-p { background: var(--pink-l); border-color: var(--pink); box-shadow: 3px 3px 0 var(--pink-d); }
-.c-y { background: var(--yel-l);  border-color: var(--yel-d); box-shadow: 3px 3px 0 #cca800; }
-.c-m { background: var(--mint);   border-color: var(--mint-d); box-shadow: 3px 3px 0 #5DC98A; }
-.c-l { background: var(--lav);    border-color: var(--lav-d); box-shadow: 3px 3px 0 #A070E8; }
-.c-p:hover { box-shadow: 5px 7px 0 var(--pink-d); }
-.c-y:hover { box-shadow: 5px 7px 0 #cca800; }
-.c-m:hover { box-shadow: 5px 7px 0 #5DC98A; }
-.c-l:hover { box-shadow: 5px 7px 0 #A070E8; }
+      /* ─── TECH ─── */
+      #techstack {
+        padding: 60px 0;
+      }
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(106px, 1fr));
+        gap: 11px;
+      }
+      .tc {
+        background: var(--white);
+        border: 2px solid var(--line);
+        border-radius: 16px;
+        padding: 15px 8px;
+        text-align: center;
+        box-shadow: 3px 3px 0 var(--line);
+        transition: all 0.2s;
+      }
+      .tc:hover {
+        transform: translateY(-5px) rotate(-3deg);
+        box-shadow: 5px 7px 0 var(--line);
+      }
+      .tc:nth-child(even):hover {
+        transform: translateY(-5px) rotate(3deg);
+      }
+      .tc-i {
+        font-size: 1.75rem;
+        margin-bottom: 6px;
+      }
+      .tc-n {
+        font-family: "Caveat", cursive;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+      .c-p {
+        background: var(--pink-l);
+        border-color: var(--pink);
+        box-shadow: 3px 3px 0 var(--pink-d);
+      }
+      .c-y {
+        background: var(--yel-l);
+        border-color: var(--yel-d);
+        box-shadow: 3px 3px 0 #cca800;
+      }
+      .c-m {
+        background: var(--mint);
+        border-color: var(--mint-d);
+        box-shadow: 3px 3px 0 #5dc98a;
+      }
+      .c-l {
+        background: var(--lav);
+        border-color: var(--lav-d);
+        box-shadow: 3px 3px 0 #a070e8;
+      }
+      .c-p:hover {
+        box-shadow: 5px 7px 0 var(--pink-d);
+      }
+      .c-y:hover {
+        box-shadow: 5px 7px 0 #cca800;
+      }
+      .c-m:hover {
+        box-shadow: 5px 7px 0 #5dc98a;
+      }
+      .c-l:hover {
+        box-shadow: 5px 7px 0 #a070e8;
+      }
 
-/* ─── CONTACT ─── */
-#contact { padding: 40px 0 80px; }
-.contact-box {
-  background: linear-gradient(135deg, var(--pink-l), var(--yel-l));
-  border: 2.5px solid var(--line); border-radius: 28px;
-  padding: 50px 48px; text-align: center;
-  box-shadow: 6px 6px 0 var(--line); position: relative; overflow: hidden;
-}
-.contact-box::before { content: '✿ ✦ ✿'; position: absolute; top: 18px; left: 24px; font-size: 1rem; opacity: .22; color: var(--pink-d); letter-spacing: 8px; }
-.contact-box::after  { content: '✦ ✿ ✦'; position: absolute; bottom: 18px; right: 24px; font-size: 1rem; opacity: .22; color: #8B6A00; letter-spacing: 8px; }
-.contact-box h2 { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(1.6rem,3.5vw,2.4rem); margin-bottom: 10px; }
-.contact-box p  { font-size: .95rem; font-weight: 600; color: var(--soft); max-width: 440px; margin: 0 auto 26px; line-height: 1.75; }
-.c-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.c-link {
-  font-family: 'Nunito', sans-serif; font-size: .84rem; font-weight: 800;
-  background: var(--white); color: var(--text); border: 2px solid var(--line);
-  border-radius: 999px; padding: 10px 22px; text-decoration: none;
-  display: flex; align-items: center; gap: 6px;
-  box-shadow: 3px 3px 0 var(--line); transition: all .2s;
-}
-.c-link:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--pink-d); border-color: var(--pink-d); }
+      /* ─── CONTACT ─── */
+      #contact {
+        padding: 40px 0 80px;
+      }
+      .contact-box {
+        background: linear-gradient(135deg, var(--pink-l), var(--yel-l));
+        border: 2.5px solid var(--line);
+        border-radius: 28px;
+        padding: 50px 48px;
+        text-align: center;
+        box-shadow: 6px 6px 0 var(--line);
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-box::before {
+        content: "✿ ✦ ✿";
+        position: absolute;
+        top: 18px;
+        left: 24px;
+        font-size: 1rem;
+        opacity: 0.22;
+        color: var(--pink-d);
+        letter-spacing: 8px;
+      }
+      .contact-box::after {
+        content: "✦ ✿ ✦";
+        position: absolute;
+        bottom: 18px;
+        right: 24px;
+        font-size: 1rem;
+        opacity: 0.22;
+        color: #8b6a00;
+        letter-spacing: 8px;
+      }
+      .contact-box h2 {
+        font-family: "DM Serif Display", serif;
+        font-style: italic;
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        margin-bottom: 10px;
+      }
+      .contact-box p {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--soft);
+        max-width: 440px;
+        margin: 0 auto 26px;
+        line-height: 1.75;
+      }
+      .c-links {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .c-link {
+        font-family: "Nunito", sans-serif;
+        font-size: 0.84rem;
+        font-weight: 800;
+        background: var(--white);
+        color: var(--text);
+        border: 2px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 22px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 3px 3px 0 var(--line);
+        transition: all 0.2s;
+      }
+      .c-link:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 var(--pink-d);
+        border-color: var(--pink-d);
+      }
 
-footer { text-align: center; padding: 26px; font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 600; color: var(--soft); }
+      footer {
+        text-align: center;
+        padding: 26px;
+        font-family: "Caveat", cursive;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--soft);
+      }
 
-/* bg doodles */
-.doodle { position: fixed; pointer-events: none; z-index: 0; opacity: .08; font-size: 1.4rem; animation: floaty 4s ease-in-out infinite; }
+      /* bg doodles */
+      .doodle {
+        position: fixed;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.08;
+        font-size: 1.4rem;
+        animation: floaty 4s ease-in-out infinite;
+      }
 
-/* ─── PROJECT SECTION ─── */
-#project { padding: 60px 0; }
-.proj-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+      /* ─── PROJECT SECTION ─── */
+      #project {
+        padding: 60px 0;
+      }
+      .proj-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
 
-/* ─── MOBILE HAMBURGER ─── */
-.hamburger {
-  display: none; flex-direction: column; justify-content: center; gap: 5px;
-  background: none; border: none; padding: 6px; border-radius: 8px;
-  transition: background .2s;
-}
-.hamburger:hover { background: var(--pink-l); }
-.hamburger span {
-  display: block; width: 22px; height: 2px;
-  background: var(--soft); border-radius: 2px; transition: all .3s;
-}
-.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background: var(--pink-d); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); background: var(--pink-d); }
+      /* ─── MOBILE HAMBURGER ─── */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        padding: 6px;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+      .hamburger:hover {
+        background: var(--pink-l);
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--soft);
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+        background: var(--pink-d);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+        background: var(--pink-d);
+      }
 
-.mobile-nav {
-  display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 499;
-  background: rgba(255,253,246,.98); backdrop-filter: blur(16px);
-  border-bottom: 2px solid var(--line);
-  padding: 12px 24px 18px; flex-direction: column; gap: 2px;
-  box-shadow: 0 8px 24px rgba(44,26,46,.06);
-}
-.mobile-nav.open { display: flex; }
-.mobile-nav a {
-  font-family: 'Caveat', cursive; font-size: 1.15rem; font-weight: 700;
-  color: var(--soft); text-decoration: none;
-  padding: 10px 12px; border-radius: 10px; transition: all .2s;
-}
-.mobile-nav a:hover { color: var(--pink-d); background: var(--pink-l); }
-.mobile-nav a.special { color: var(--pink-d); }
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        right: 0;
+        z-index: 499;
+        background: rgba(255, 253, 246, 0.98);
+        backdrop-filter: blur(16px);
+        border-bottom: 2px solid var(--line);
+        padding: 12px 24px 18px;
+        flex-direction: column;
+        gap: 2px;
+        box-shadow: 0 8px 24px rgba(44, 26, 46, 0.06);
+      }
+      .mobile-nav.open {
+        display: flex;
+      }
+      .mobile-nav a {
+        font-family: "Caveat", cursive;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--soft);
+        text-decoration: none;
+        padding: 10px 12px;
+        border-radius: 10px;
+        transition: all 0.2s;
+      }
+      .mobile-nav a:hover {
+        color: var(--pink-d);
+        background: var(--pink-l);
+      }
+      .mobile-nav a.special {
+        color: var(--pink-d);
+      }
 
-/* ─── SCROLL ANIMATIONS ─── */
-.fade-up {
-  opacity: 0; transform: translateY(28px);
-  transition: opacity .65s ease, transform .65s ease;
-}
-.fade-up.visible { opacity: 1; transform: translateY(0); }
+      /* ─── SCROLL ANIMATIONS ─── */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-/* ─── FOCUS STYLES ─── */
-*:focus-visible {
-  outline: 2px solid var(--pink-d); outline-offset: 3px;
-  border-radius: 6px; box-shadow: 0 0 0 4px #FF85A120;
-}
+      /* ─── FOCUS STYLES ─── */
+      *:focus-visible {
+        outline: 2px solid var(--pink-d);
+        outline-offset: 3px;
+        border-radius: 6px;
+        box-shadow: 0 0 0 4px #ff85a120;
+      }
 
-/* ─── SCROLL TO TOP ─── */
-#scroll-top {
-  position: fixed; bottom: 28px; right: 28px; z-index: 400;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: var(--white); border: 2px solid var(--line);
-  box-shadow: 3px 3px 0 var(--line); color: var(--pink-d);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; text-decoration: none;
-  transition: all .25s; opacity: 0; pointer-events: none;
-  transform: translateY(12px);
-}
-#scroll-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-#scroll-top:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--pink-d); border-color: var(--pink-d); }
+      /* ─── SCROLL TO TOP ─── */
+      #scroll-top {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 400;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 2px solid var(--line);
+        box-shadow: 3px 3px 0 var(--line);
+        color: var(--pink-d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: all 0.25s;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(12px);
+      }
+      #scroll-top.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+      #scroll-top:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 var(--pink-d);
+        border-color: var(--pink-d);
+      }
 
-/* ─── RESPONSIVE ─── */
+      /* ─── RESPONSIVE ─── */
 
-/* Large tablet / small desktop  (861 – 1100px) */
-@media (max-width: 1100px) {
-  nav { padding: 15px 40px; }
-  .wrap { padding: 0 40px; }
-  .wave-div { margin: 0 40px; }
-  #hero { padding: 100px 40px 60px; gap: 32px; grid-template-columns: 1fr 280px; }
-  .blob-wrap { width: 240px; height: 280px; }
-}
+      /* Large tablet / small desktop  (861 – 1100px) */
+      @media (max-width: 1100px) {
+        nav {
+          padding: 15px 40px;
+        }
+        .wrap {
+          padding: 0 40px;
+        }
+        .wave-div {
+          margin: 0 40px;
+        }
+        #hero {
+          padding: 100px 40px 60px;
+          gap: 32px;
+          grid-template-columns: 1fr 280px;
+        }
+        .blob-wrap {
+          width: 240px;
+          height: 280px;
+        }
+      }
 
-/* Tablet / iPad portrait  (≤ 860px) */
-@media (max-width: 860px) {
-  #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
-  .hero-r { display: none; }
-  nav { padding: 13px 24px; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .wrap { padding: 0 24px; }
-  .wave-div { margin: 0 24px; }
-  .contact-box { padding: 36px 24px; }
-  #scroll-top { bottom: 20px; right: 16px; }
-  .proj-cards { grid-template-columns: 1fr; }
-}
+      /* Tablet / iPad portrait  (≤ 860px) */
+      @media (max-width: 860px) {
+        #hero {
+          grid-template-columns: 1fr;
+          padding: 100px 24px 60px;
+        }
+        .hero-r {
+          display: none;
+        }
+        nav {
+          padding: 13px 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .wrap {
+          padding: 0 24px;
+        }
+        .wave-div {
+          margin: 0 24px;
+        }
+        .contact-box {
+          padding: 36px 24px;
+        }
+        #scroll-top {
+          bottom: 20px;
+          right: 16px;
+        }
+        .proj-cards {
+          grid-template-columns: 1fr;
+        }
+      }
 
-/* Large phone  (≤ 600px) */
-@media (max-width: 600px) {
-  .btns { flex-direction: column; align-items: flex-start; }
-  .btn-fill, .btn-out { width: 100%; justify-content: center; }
-  .c-links { flex-direction: column; align-items: center; }
-  .c-link { width: 100%; max-width: 300px; justify-content: center; }
-  .exp-header { flex-wrap: wrap; }
-  .exp-right { margin-left: auto; gap: 8px; }
-  .stats { justify-content: flex-start; gap: 8px; }
-  .tech-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
-  .sec-sub { margin-bottom: 28px; }
-}
+      /* Large phone  (≤ 600px) */
+      @media (max-width: 600px) {
+        .btns {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .btn-fill,
+        .btn-out {
+          width: 100%;
+          justify-content: center;
+        }
+        .c-links {
+          flex-direction: column;
+          align-items: center;
+        }
+        .c-link {
+          width: 100%;
+          max-width: 300px;
+          justify-content: center;
+        }
+        .exp-header {
+          flex-wrap: wrap;
+        }
+        .exp-right {
+          margin-left: auto;
+          gap: 8px;
+        }
+        .stats {
+          justify-content: flex-start;
+          gap: 8px;
+        }
+        .tech-grid {
+          grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        }
+        .sec-sub {
+          margin-bottom: 28px;
+        }
+      }
 
-/* Phone  (≤ 480px) */
-@media (max-width: 480px) {
-  nav { padding: 12px 20px; }
-  .mobile-nav { top: 52px; }
-  #hero { padding: 82px 20px 44px; }
-  .wrap { padding: 0 20px; }
-  .wave-div { margin: 0 20px; }
-  .contact-box { padding: 28px 20px; }
-  #experience { padding: 56px 0 44px; }
-  #techstack { padding: 44px 0; }
-  #contact { padding: 28px 0 60px; }
-  .sec-title { font-size: clamp(1.75rem, 7vw, 2.4rem); }
-  .hero-desc { font-size: .95rem; }
-  .exp-role { font-size: .88rem; }
-  .exp-period { font-size: .8rem; padding: 2px 10px; }
-  .exp-short { font-size: .78rem; }
-  .tech-grid { grid-template-columns: repeat(3, 1fr); }
-  .pills { gap: 6px; }
-  .pill { font-size: .9rem; padding: 3px 12px; }
-  .stat-card { padding: 10px 13px; }
-  .etag { font-size: .82rem; }
-}
+      /* Phone  (≤ 480px) */
+      @media (max-width: 480px) {
+        nav {
+          padding: 12px 20px;
+        }
+        .mobile-nav {
+          top: 52px;
+        }
+        #hero {
+          padding: 82px 20px 44px;
+        }
+        .wrap {
+          padding: 0 20px;
+        }
+        .wave-div {
+          margin: 0 20px;
+        }
+        .contact-box {
+          padding: 28px 20px;
+        }
+        #experience {
+          padding: 56px 0 44px;
+        }
+        #techstack {
+          padding: 44px 0;
+        }
+        #contact {
+          padding: 28px 0 60px;
+        }
+        .sec-title {
+          font-size: clamp(1.75rem, 7vw, 2.4rem);
+        }
+        .hero-desc {
+          font-size: 0.95rem;
+        }
+        .exp-role {
+          font-size: 0.88rem;
+        }
+        .exp-period {
+          font-size: 0.8rem;
+          padding: 2px 10px;
+        }
+        .exp-short {
+          font-size: 0.78rem;
+        }
+        .tech-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .pills {
+          gap: 6px;
+        }
+        .pill {
+          font-size: 0.9rem;
+          padding: 3px 12px;
+        }
+        .stat-card {
+          padding: 10px 13px;
+        }
+        .etag {
+          font-size: 0.82rem;
+        }
+      }
 
-/* Small phone  (≤ 380px) */
-@media (max-width: 380px) {
-  .hero-name { font-size: clamp(2.8rem, 13vw, 3.5rem); }
-  .tech-grid { grid-template-columns: repeat(2, 1fr); }
-  .stats { gap: 6px; }
-  .stat-n { font-size: 1.4rem; }
-  .btns { gap: 8px; }
-}
-</style>
-    </head>
-    <body>
+      /* Small phone  (≤ 380px) */
+      @media (max-width: 380px) {
+        .hero-name {
+          font-size: clamp(2.8rem, 13vw, 3.5rem);
+        }
+        .tech-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stats {
+          gap: 6px;
+        }
+        .stat-n {
+          font-size: 1.4rem;
+        }
+        .btns {
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- cursor elements -->
+    <div id="c-dot"></div>
+    <div id="c-ring"></div>
 
-        <!-- cursor elements -->
-        <div id="c-dot"></div>
-        <div id="c-ring"></div>
+    <!-- bg doodles -->
+    <div class="doodle" style="top: 14%; left: 4%; animation-delay: 0.3s">
+      ✿
+    </div>
+    <div
+      class="doodle"
+      style="top: 44%; right: 3%; animation-delay: 1.1s; font-size: 1rem"
+    >
+      ✦
+    </div>
+    <div class="doodle" style="bottom: 28%; left: 3%; animation-delay: 1.7s">
+      ⭑
+    </div>
+    <div class="doodle" style="top: 70%; right: 5%; animation-delay: 2.2s">
+      ❋
+    </div>
 
-        <!-- bg doodles -->
-        <div class="doodle" style="top:14%;left:4%;animation-delay:.3s">✿</div>
-        <div class="doodle"
-            style="top:44%;right:3%;animation-delay:1.1s;font-size:1rem">✦</div>
-        <div class="doodle"
-            style="bottom:28%;left:3%;animation-delay:1.7s">⭑</div>
-        <div class="doodle"
-            style="top:70%;right:5%;animation-delay:2.2s">❋</div>
+    <!-- NAV -->
+    <nav>
+      <a href="#hero" class="logo"
+        ><img
+          src="favicon.svg"
+          alt="butter"
+          style="height: 1.3em; vertical-align: middle; display: inline-block"
+        />butterada.dev
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#techstack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a
+            href="buttermenu.html"
+            style="color: var(--pink-d); font-weight: 700"
+            >✦ butterMenu</a
+          >
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#hero" class="mobile-link">Home</a>
+      <a href="#experience" class="mobile-link">Experience</a>
+      <a href="#techstack" class="mobile-link">Stack</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="buttermenu.html" class="mobile-link special">✦ butterMenu</a>
+    </div>
 
-        <!-- NAV -->
-        <nav>
-            <a href="#hero" class="logo"><img src="favicon.svg" alt="butter" style="height:1.3em;vertical-align:middle;display:inline-block;">butterada.dev </a> 
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#techstack">Stack</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="buttermenu.html" style="color:var(--pink-d);font-weight:700">✦ butterMenu</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
-        <div class="mobile-nav" id="mobile-nav">
-            <a href="#hero" class="mobile-link">Home</a>
-            <a href="#experience" class="mobile-link">Experience</a>
-            <a href="#techstack" class="mobile-link">Stack</a>
-            <a href="#contact" class="mobile-link">Contact</a>
-            <a href="buttermenu.html" class="mobile-link special">✦ butterMenu</a>
+    <!-- ════════════ HERO ════════════ -->
+    <section id="hero">
+      <div>
+        <div class="hero-eye">Hi there, I'm Noei (Butter)</div>
+        <h1 class="hero-name">
+          <span class="hl"> Wonrada Kaaungku</span><br />
+        </h1>
+        <p class="hero-role">
+          Full-Stack Engineer · "Noei" means Butter in Thai · Thailand 🌸
+        </p>
+        <p class="hero-desc">
+          4 years shipping production systems solo — from UX/UI to deployment. I
+          don't just write code, I own the problem. Currently building
+          <strong style="color: var(--pink-d)">butterMenu</strong> — a food
+          platform that started with my mom's restaurant. 🧈
+        </p>
+        <div class="pills">
+          <span class="pill">Vue.js</span><span class="pill">Angular</span>
+          <span class="pill">Next.js</span><span class="pill">Laravel</span>
+          <span class="pill">Golang</span><span class="pill">Flutter</span>
+          <span class="pill">TypeScript</span><span class="pill">Docker</span>
         </div>
+        <div class="btns">
+          <a href="buttermenu.html" class="btn-fill">✨ See My Project</a>
+          <a href="#contact" class="btn-out">💌 Contact Me</a>
+        </div>
+      </div>
 
-        <!-- ════════════ HERO ════════════ -->
-        <section id="hero">
-            <div>
-                <div class="hero-eye">Hi there, I'm Noei (Butter)</div>
-                <h1 class="hero-name"><span class="hl"> Wonrada Kaaungku</span><br></h1>
-                <p class="hero-role">Full-Stack Engineer · "Noei" means Butter in Thai · Thailand 🌸</p>
-                <p class="hero-desc">4 years shipping production systems solo —
-                    from UX/UI to deployment. I don't just write code, I own the
-                    problem. Currently building <strong
-                        style="color:var(--pink-d)">butterMenu</strong> — a food
-                    platform that started with my mom's restaurant. 🧈</p>
-                <div class="pills">
-                    <span class="pill">Vue.js</span><span
-                        class="pill">Angular</span>
-                    <span class="pill">Next.js</span><span
-                        class="pill">Laravel</span>
-                    <span class="pill">Golang</span><span
-                        class="pill">Flutter</span>
-                    <span class="pill">TypeScript</span><span
-                        class="pill">Docker</span>
+      <div class="hero-r">
+        <div class="blob-wrap">
+          <div class="blob-bg"></div>
+          <div class="blob-in">
+            <img
+              src="photo.jpg"
+              alt="Noei"
+              onerror="this.parentElement.innerHTML = '🧈'"
+            />
+          </div>
+          <div class="blob-s1">✿</div>
+          <div class="blob-s2">⭑</div>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-n">4</div>
+            <div class="stat-l">Years</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-n">7</div>
+            <div class="stat-l">Companies</div>
+          </div>
+          <div class="stat-card" style="background: var(--white)">
+            <div class="stat-n">∞</div>
+            <div class="stat-l">Coffee ☕</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-div"></div>
+
+    <!-- ════════════ EXPERIENCE ════════════ -->
+    <section id="experience" class="fade-up">
+      <div class="wrap">
+        <div class="tag t-pk">✿ Experience</div>
+        <h2 class="sec-title">My Journey</h2>
+        <p class="sec-sub">
+          Started before graduation. Never stopped building. Click any card to
+          expand.
+        </p>
+
+        <div class="timeline">
+          <!-- 1. Current — Accipitech -->
+          <div class="exp-row" data-open="false">
+            <div class="exp-icon">🔐</div>
+            <div class="exp-card">
+              <div class="exp-header">
+                <div class="exp-header-left">
+                  <div class="exp-role">
+                    Full-Stack Developer — Frontend Lead
+                  </div>
+                  <div class="exp-co">
+                    Accipitech Co., Ltd · Co-founder (4% equity)
+                  </div>
+                  <div class="exp-short">
+                    Built from scratch — project structure, architecture &
+                    frontend lead. Enterprise security dashboards for Dutch
+                    international team.
+                  </div>
                 </div>
-                <div class="btns">
-                    <a href="buttermenu.html" class="btn-fill">✨ See My
-                        Project</a>
-                    <a href="#contact" class="btn-out">💌 Contact Me</a>
+                <div class="exp-right">
+                  <div class="exp-period">2025 – Present</div>
+                  <div class="exp-chevron">▼</div>
                 </div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-body-inner">
+                  <p class="exp-full">
+                    Started the project from zero — defined project structure,
+                    architecture, and led all frontend development. Building
+                    EASM, NDR & Endpoint Security dashboards for international
+                    enterprise clients. Vue.js + Highcharts for security data
+                    visualization, multi-tenant Laravel APIs, MySQL, Docker +
+                    Nginx deployment. Wrote initial test suites with PEST &
+                    PHPUnit. Also migrating legacy systems to modern Vue.js.
+                    Working daily in English with Dutch international team.
+                  </p>
+                  <div class="exp-tags">
+                    <span class="etag">Vue.js</span
+                    ><span class="etag">Laravel</span
+                    ><span class="etag">MySQL</span>
+                    <span class="etag">Highcharts</span
+                    ><span class="etag">Docker</span
+                    ><span class="etag">Nginx</span>
+                    <span class="etag">PEST</span
+                    ><span class="etag">PHPUnit</span
+                    ><span class="etag">TypeScript</span>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div class="hero-r">
-                <div class="blob-wrap">
-                    <div class="blob-bg"></div>
-                    <div class="blob-in">
-                        <img src="photo.jpg" alt="Noei"
-                            onerror="this.parentElement.innerHTML='🧈'">
-                    </div>
-                    <div class="blob-s1">✿</div>
-                    <div class="blob-s2">⭑</div>
+          <!-- 3. Warehouse -->
+          <div class="exp-row" data-open="false">
+            <div class="exp-icon">📦</div>
+            <div class="exp-card">
+              <div class="exp-header">
+                <div class="exp-header-left">
+                  <div class="exp-role">Frontend Developer</div>
+                  <div class="exp-co">RIS Central Group</div>
+                  <div class="exp-short">
+                    Angular frontend for warehouse inventory platform.
+                  </div>
                 </div>
-                <div class="stats">
-                    <div class="stat-card"><div class="stat-n">4</div><div
-                            class="stat-l">Years</div></div>
-                    <div class="stat-card"><div class="stat-n">7</div><div
-                            class="stat-l">Companies</div></div>
-                    <div class="stat-card" style="background:var(--white)"><div
-                            class="stat-n">∞</div><div class="stat-l">Coffee
-                            ☕</div></div>
+                <div class="exp-right">
+                  <div class="exp-period">2024 · 6 mo</div>
+                  <div class="exp-chevron">▼</div>
                 </div>
-            </div>
-        </section>
-
-        <div class="wave-div"></div>
-
-        <!-- ════════════ EXPERIENCE ════════════ -->
-        <section id="experience" class="fade-up">
-            <div class="wrap">
-                <div class="tag t-pk">✿ Experience</div>
-                <h2 class="sec-title">My Journey</h2>
-                <p class="sec-sub">Started before graduation. Never stopped
-                    building. Click any card to expand.</p>
-
-                <div class="timeline">
-
-                    <!-- 1. Current — Accipitech -->
-                    <div class="exp-row" data-open="false">
-                        <div class="exp-icon">🔐</div>
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <div class="exp-header-left">
-                                    <div class="exp-role">Full-Stack Developer
-                                        — Frontend Lead</div>
-                                    <div class="exp-co">Accipitech Co., Ltd ·
-                                        Co-founder (4% equity)</div>
-                                    <div class="exp-short">Built from scratch —
-                                        project structure, architecture &
-                                        frontend lead. Enterprise security
-                                        dashboards for Dutch international
-                                        team. Key client: Marlink.</div>
-                                </div>
-                                <div class="exp-right">
-                                    <div class="exp-period">2025 – Present</div>
-                                    <div class="exp-chevron">▼</div>
-                                </div>
-                            </div>
-                            <div class="exp-body">
-                                <div class="exp-body-inner">
-                                    <p class="exp-full">Started the project
-                                        from zero — defined project structure,
-                                        architecture, and led all frontend
-                                        development. Building EASM, NDR &
-                                        Endpoint Security dashboards for
-                                        international enterprise clients
-                                        (including Marlink). Vue.js + Highcharts
-                                        for security data visualization,
-                                        multi-tenant Laravel APIs, MySQL,
-                                        Docker + Nginx deployment. Wrote
-                                        initial test suites with PEST &
-                                        PHPUnit. Also migrating legacy systems
-                                        to modern Vue.js. Working daily in
-                                        English with Dutch international
-                                        team.</p>
-                                    <div class="exp-tags">
-                                        <span class="etag">Vue.js</span><span
-                                            class="etag">Laravel</span><span
-                                            class="etag">MySQL</span>
-                                        <span class="etag">Highcharts</span><span
-                                            class="etag">Docker</span><span
-                                            class="etag">Nginx</span>
-                                        <span class="etag">PEST</span><span
-                                            class="etag">PHPUnit</span><span
-                                            class="etag">TypeScript</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. Warehouse -->
-                    <div class="exp-row" data-open="false">
-                        <div class="exp-icon">📦</div>
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <div class="exp-header-left">
-                                    <div class="exp-role">Frontend
-                                        Developer</div>
-                                    <div class="exp-co">Warehouse Management
-                                        System</div>
-                                    <div class="exp-short">Angular frontend for
-                                        warehouse inventory platform.</div>
-                                </div>
-                                <div class="exp-right">
-                                    <div class="exp-period">2024 · 6 mo</div>
-                                    <div class="exp-chevron">▼</div>
-                                </div>
-                            </div>
-                            <div class="exp-body">
-                                <div class="exp-body-inner">
-                                    <p class="exp-full">Contract role — built
-                                        inventory tracking UI, stock management
-                                        workflows, and reporting components.
-                                        Angular-only frontend delivery. Left
-                                        when contract ended.</p>
-                                    <div class="exp-tags">
-                                        <span class="etag">Angular</span><span
-                                            class="etag">TypeScript</span><span
-                                            class="etag">RxJS</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. Freelance Go -->
-                    <div class="exp-row" data-open="false">
-                        <div class="exp-icon">🚛</div>
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <div class="exp-header-left">
-                                    <div class="exp-role">Backend Developer
-                                        (Freelance)</div>
-                                    <div class="exp-co">Truck Dispatch
-                                        Microservices</div>
-                                    <div class="exp-short">Go microservices for
-                                        a truck-booking & dispatch
-                                        platform.</div>
-                                </div>
-                                <div class="exp-right">
-                                    <div class="exp-period">2024 · 3 mo</div>
-                                    <div class="exp-chevron">▼</div>
-                                </div>
-                            </div>
-                            <div class="exp-body">
-                                <div class="exp-body-inner">
-                                    <p class="exp-full">Designed and built the
-                                        driver service and truck dispatch
-                                        microservice from scratch. Handled DB
-                                        schema design for bookings, routes, and
-                                        driver status. Ran concurrently with job
-                                        #4 — my first deep Go experience.</p>
-                                    <div class="exp-tags">
-                                        <span class="etag">Golang</span><span
-                                            class="etag">Microservices</span>
-                                        <span class="etag">DB Design</span><span
-                                            class="etag">REST API</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. STAR - 3 solo systems (open by default) -->
-                    <div class="exp-row open" data-open="true">
-                        <div class="exp-icon">⭐</div>
-                        <div class="exp-card star">
-                            <div class="exp-header">
-                                <div class="exp-header-left">
-                                    <div class="exp-role">Full-Stack Developer —
-                                        Solo, End-to-End</div>
-                                    <div class="exp-co">3 Production Systems ·
-                                        Owned Everything</div>
-                                    <div class="exp-short">Requirements → UX/UI
-                                        → FE → BE → DevOps. All alone.</div>
-                                </div>
-                                <div class="exp-right">
-                                    <div class="exp-period">2023–24 · 1 yr</div>
-                                    <div class="exp-chevron">▼</div>
-                                </div>
-                            </div>
-                            <div class="exp-body">
-                                <div class="exp-body-inner">
-                                    <p class="exp-full">Hired as junior but
-                                        given full ownership of three separate
-                                        production systems. Each one solo —
-                                        client meetings, UX/UI design, Angular
-                                        frontend, Laravel backend, Docker +
-                                        Oracle Linux deployment.</p>
-                                    <div class="sys-cards">
-                                        <div class="sys-card pink">
-                                            <div class="sys-card-title">① Call
-                                                Center Log System</div>
-                                            <div class="sys-card-desc">CRUD for
-                                                logging inbound/outbound calls.
-                                                50–100 users. Stable Docker
-                                                deploy, no scaling needed.</div>
-                                        </div>
-                                        <div class="sys-card yel">
-                                            <div class="sys-card-title">②
-                                                E-Document Approval System</div>
-                                            <div
-                                                class="sys-card-desc">Multi-step
-                                                approval chains, digital
-                                                signatures, <strong>WebSocket
-                                                    real-time
-                                                    notifications</strong> —
-                                                first WebSocket in production.
-                                                Built during post-COVID
-                                                e-document boom. 50 active
-                                                users.</div>
-                                        </div>
-                                        <div class="sys-card mint">
-                                            <div class="sys-card-title">③ Online
-                                                Exam System</div>
-                                            <div class="sys-card-desc">Zero
-                                                staging — deployed straight to
-                                                production. 50–100+ users on day
-                                                one. It worked. Contract ended
-                                                before further iterations.</div>
-                                        </div>
-                                    </div>
-                                    <div class="exp-tags">
-                                        <span class="etag">Angular</span><span
-                                            class="etag">Laravel</span>
-                                        <span class="etag">WebSocket</span><span
-                                            class="etag">Docker</span>
-                                        <span class="etag">Oracle
-                                            Linux</span><span
-                                            class="etag">UX/UI</span><span
-                                            class="etag">Solo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. Revenue Dept -->
-                    <div class="exp-row" data-open="false">
-                        <div class="exp-icon">🏛️</div>
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <div class="exp-header-left">
-                                    <div class="exp-role">Frontend
-                                        Developer</div>
-                                    <div class="exp-co">Revenue Department ·
-                                        Government</div>
-                                    <div class="exp-short">Angular frontend for
-                                        a Thai government revenue system.</div>
-                                </div>
-                                <div class="exp-right">
-                                    <div class="exp-period">2022-23 · 6 mo</div>
-                                    <div class="exp-chevron">▼</div>
-                                </div>
-                            </div>
-                            <div class="exp-body">
-                                <div class="exp-body-inner">
-                                    <p class="exp-full">Contract to maintain and
-                                        improve a legacy Angular codebase for
-                                        the Thai revenue department. Mostly bug
-                                        fixes and UI updates. Chose not to renew
-                                        — not enough new learning.</p>
-                                    <div class="exp-tags">
-                                        <span class="etag">Angular</span><span
-                                            class="etag">TypeScript</span><span
-                                            class="etag">Government</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 6. First job -->
-                    <div class="exp-row" data-open="false">
-                        <div class="exp-icon">🌱</div>
-                        <div class="exp-card">
-                            <div class="exp-header">
-                                <div class="exp-header-left">
-                                    <div class="exp-role">UX/UI + Full-Stack
-                                        Developer</div>
-                                    <div class="exp-co">Software House · First
-                                        Job</div>
-                                    <div class="exp-short">Wore every hat before
-                                        even graduating.</div>
-                                </div>
-                                <div class="exp-right">
-                                    <div class="exp-period">2021-22 · 1 yr</div>
-                                    <div class="exp-chevron">▼</div>
-                                </div>
-                            </div>
-                            <div class="exp-body">
-                                <div class="exp-body-inner">
-                                    <p class="exp-full">First role at a friend's
-                                        software house. Real client work from
-                                        day one — UX/UI design, Angular
-                                        frontend, Laravel backend, Flutter
-                                        mobile, and attending client requirement
-                                        meetings directly. Left after 1 year:
-                                        salary was 18,000 THB but scope of work
-                                        was a full team's worth.</p>
-                                    <div class="exp-tags">
-                                        <span class="etag">UX/UI</span><span
-                                            class="etag">Angular</span>
-                                        <span class="etag">Laravel</span><span
-                                            class="etag">Flutter</span><span
-                                            class="etag">Client Meetings</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div><!-- /timeline -->
-            </div>
-        </section>
-
-        <div class="wave-div"></div>
-
-        <!-- ════════════ PROJECT ════════════ -->
-        <section id="project" class="fade-up">
-            <div class="wrap">
-                <div class="tag t-pk"><img src="favicon.svg" alt="butter" style="height:1em;vertical-align:middle;display:inline-block;"> Side Project</div>
-                <h2 class="sec-title">butterMenu</h2>
-                <p class="sec-sub">better menu — but made by butter (that's me).
-                    A food platform built from a real problem.</p>
-
-                <div
-                    style="background:linear-gradient(135deg,var(--pink-l),var(--yel-l));border:2.5px solid var(--line);border-radius:24px;padding:32px;box-shadow:5px 5px 0 var(--line);margin-top:20px;">
-                    <div class="proj-cards">
-                        <div
-                            style="background:var(--white);border:2px solid var(--line);border-radius:16px;padding:20px;box-shadow:3px 3px 0 var(--line)">
-                            <div
-                                style="font-size:1.5rem;margin-bottom:8px">😤</div>
-                            <div
-                                style="font-weight:900;font-size:.9rem;margin-bottom:6px">The
-                                Problem I Had</div>
-                            <p
-                                style="font-size:.83rem;font-weight:600;color:var(--soft);line-height:1.65">I
-                                wanted to check a restaurant's menu before going
-                                — but most places don't have a website. Stuck
-                                scrolling Google Maps reviews hoping someone
-                                photographed the dish I wanted.</p>
-                        </div>
-                        <div
-                            style="background:var(--white);border:2px solid var(--line);border-radius:16px;padding:20px;box-shadow:3px 3px 0 var(--line)">
-                            <div
-                                style="font-size:1.5rem;margin-bottom:8px">💡</div>
-                            <div
-                                style="font-weight:900;font-size:.9rem;margin-bottom:6px">Why
-                                I Build It This Way</div>
-                            <p
-                                style="font-size:.83rem;font-weight:600;color:var(--soft);line-height:1.65">Mom
-                                runs the restaurant alone and has knee pain — so
-                                ordering via QR reduces how much she walks.
-                                That's the real success metric. Not DAU. Not
-                                revenue. Just mom walking less.</p>
-                        </div>
-                    </div>
-                    <div
-                        style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-                        <div style="display:flex;gap:8px;flex-wrap:wrap">
-                            <span class="etag">Next.js</span><span
-                                class="etag">Laravel</span><span
-                                class="etag">Claude AI</span><span
-                                class="etag">Docker</span><span
-                                class="etag">PostgreSQL</span>
-                        </div>
-                        <a href="buttermenu.html"
-                            style="font-family:'Nunito',sans-serif;font-size:.84rem;font-weight:800;background:var(--pink-d);color:#fff;border:2px solid var(--pink-d);border-radius:999px;padding:10px 22px;text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:3px 3px 0 #CC5070;transition:all .2s"
-                            onmouseover="this.style.transform='translate(-2px,-2px)'"
-                            onmouseout="this.style.transform='none'">✨ Full Case
-                            Study →</a>
-                    </div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-body-inner">
+                  <p class="exp-full">
+                    Contract role — built inventory tracking UI, stock
+                    management workflows, and reporting components. Angular-only
+                    frontend delivery. Left when contract ended.
+                  </p>
+                  <div class="exp-tags">
+                    <span class="etag">Angular</span
+                    ><span class="etag">TypeScript</span
+                    ><span class="etag">RxJS</span>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <div class="wave-div"></div>
-
-        <!-- ════════════ TECH STACK ════════════ -->
-        <section id="techstack" class="fade-up">
-            <div class="wrap">
-                <div class="tag t-yl">⭑ Tech Stack</div>
-                <h2 class="sec-title">Tools I Love</h2>
-                <p class="sec-sub">Frameworks, languages & tools I use to ship
-                    real products.</p>
-                <div class="tech-grid">
-                    <div class="tc c-p"><div class="tc-i">🟢</div><div
-                            class="tc-n">Vue.js</div></div>
-                    <div class="tc c-l"><div class="tc-i">🅰️</div><div
-                            class="tc-n">Angular</div></div>
-                    <div class="tc c-y"><div class="tc-i">▲</div><div
-                            class="tc-n">Next.js</div></div>
-                    <div class="tc c-p"><div class="tc-i">🦋</div><div
-                            class="tc-n">Flutter</div></div>
-                    <div class="tc c-y"><div class="tc-i">🐘</div><div
-                            class="tc-n">Laravel</div></div>
-                    <div class="tc c-m"><div class="tc-i">🐹</div><div
-                            class="tc-n">Golang</div></div>
-                    <div class="tc c-l"><div class="tc-i">🔷</div><div
-                            class="tc-n">TypeScript</div></div>
-                    <div class="tc c-m"><div class="tc-i">🐘</div><div
-                            class="tc-n">PostgreSQL</div></div>
-                    <div class="tc c-l"><div class="tc-i">🐳</div><div
-                            class="tc-n">Docker</div></div>
-                    <div class="tc c-p"><div class="tc-i">⚙️</div><div
-                            class="tc-n">Nginx</div></div>
-                    <div class="tc c-y"><div class="tc-i">🎨</div><div
-                            class="tc-n">UX / UI</div></div>
-                    <div class="tc c-m"><div class="tc-i">⚡</div><div
-                            class="tc-n">WebSocket</div></div>
+          <!-- 4. Freelance Go -->
+          <div class="exp-row" data-open="false">
+            <div class="exp-icon">🚛</div>
+            <div class="exp-card">
+              <div class="exp-header">
+                <div class="exp-header-left">
+                  <div class="exp-role">Backend Developer</div>
+                  <div class="exp-co">Freelance Microservices</div>
+                  <div class="exp-short">
+                    Go microservices for a truck-booking & dispatch platform.
+                  </div>
                 </div>
+                <div class="exp-right">
+                  <div class="exp-period">2024 · 3 mo</div>
+                  <div class="exp-chevron">▼</div>
+                </div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-body-inner">
+                  <p class="exp-full">
+                    Designed and built the driver service and truck dispatch
+                    microservice from scratch. Handled DB schema design for
+                    bookings, routes, and driver status. Ran concurrently with
+                    job #4 — my first deep Go experience.
+                  </p>
+                  <div class="exp-tags">
+                    <span class="etag">Golang</span
+                    ><span class="etag">Microservices</span>
+                    <span class="etag">DB Design</span
+                    ><span class="etag">REST API</span>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <div class="wave-div"></div>
-
-        <!-- ════════════ CONTACT ════════════ -->
-        <section id="contact" class="fade-up">
-            <div class="wrap">
-                <div class="contact-box">
-                    <h2>Let's Work Together 🌸</h2>
-                    <p>Open to remote opportunities — especially in Europe.
-                        Looking for a full-stack dev who ships end-to-end? Let's
-                        talk!</p>
-                    <div class="c-links">
-                        <a href="mailto:wonrada.k@gmail.com"
-                            class="c-link">📧 Email</a>
-                        <a href="https://github.com/wonrada" class="c-link"
-                            target="_blank">🐙 GitHub</a>
-                        <a href="https://www.linkedin.com/in/wonrada-ka-ungku-b49327247/" class="c-link"
-                            target="_blank">💼 LinkedIn</a>
-                        <a href="buttermenu.html" class="c-link">✨ My
-                            Project</a>
+          <!-- 5. STAR - 3 solo systems (open by default) -->
+          <div class="exp-row open" data-open="true">
+            <div class="exp-icon">⭐</div>
+            <div class="exp-card star">
+              <div class="exp-header">
+                <div class="exp-header-left">
+                  <div class="exp-role">
+                    Full-Stack Developer — Solo, End-to-End
+                  </div>
+                  <div class="exp-co">
+                    Teleinfo Media Public Company Limited
+                  </div>
+                  <div class="exp-short">
+                    Requirements → UX/UI → FE → BE → DevOps. All alone.
+                  </div>
+                </div>
+                <div class="exp-right">
+                  <div class="exp-period">2023–24 · 1 yr</div>
+                  <div class="exp-chevron">▼</div>
+                </div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-body-inner">
+                  <p class="exp-full">
+                    Hired as junior but given full ownership of three separate
+                    production systems. Each one solo — client meetings, UX/UI
+                    design, Angular frontend, Laravel backend, Docker + Oracle
+                    Linux deployment.
+                  </p>
+                  <div class="sys-cards">
+                    <div class="sys-card pink">
+                      <div class="sys-card-title">① Call Center Log System</div>
+                      <div class="sys-card-desc">
+                        CRUD for logging inbound/outbound calls. 50–100 users.
+                        Stable Docker deploy, no scaling needed.
+                      </div>
                     </div>
+                    <div class="sys-card yel">
+                      <div class="sys-card-title">
+                        ② E-Document Approval System
+                      </div>
+                      <div class="sys-card-desc">
+                        Multi-step approval chains, digital signatures,
+                        <strong>WebSocket real-time notifications</strong> —
+                        first WebSocket in production. Built during post-COVID
+                        e-document boom. 50 active users.
+                      </div>
+                    </div>
+                    <div class="sys-card mint">
+                      <div class="sys-card-title">③ Online Exam System</div>
+                      <div class="sys-card-desc">
+                        Zero staging — deployed straight to production. 50–100+
+                        users on day one. It worked. Contract ended before
+                        further iterations.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="exp-tags">
+                    <span class="etag">Angular</span
+                    ><span class="etag">Laravel</span>
+                    <span class="etag">WebSocket</span
+                    ><span class="etag">Docker</span>
+                    <span class="etag">Oracle Linux</span
+                    ><span class="etag">UX/UI</span
+                    ><span class="etag">Solo</span>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <footer>Made with 💖 by Wonrada Kaaungku · "Noei" in Thai, "Butter" internationally 🧈 · butterada.dev</footer>
+          <!-- 5. Revenue Dept -->
+          <div class="exp-row" data-open="false">
+            <div class="exp-icon">🏛️</div>
+            <div class="exp-card">
+              <div class="exp-header">
+                <div class="exp-header-left">
+                  <div class="exp-role">Frontend Developer</div>
+                  <div class="exp-co">
+                    Professional Computer Company Limited (PCC) · Government
+                  </div>
+                  <div class="exp-short">
+                    Angular frontend for a Thai government revenue system.
+                  </div>
+                </div>
+                <div class="exp-right">
+                  <div class="exp-period">2022-23 · 6 mo</div>
+                  <div class="exp-chevron">▼</div>
+                </div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-body-inner">
+                  <p class="exp-full">
+                    Contract to maintain and improve a legacy Angular codebase
+                    for the Thai revenue department. Mostly bug fixes and UI
+                    updates. Chose not to renew — not enough new learning.
+                  </p>
+                  <div class="exp-tags">
+                    <span class="etag">Angular</span
+                    ><span class="etag">TypeScript</span
+                    ><span class="etag">Government</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <a href="#hero" id="scroll-top" aria-label="Back to top">↑</a>
+          <!-- 6. First job -->
+          <div class="exp-row" data-open="false">
+            <div class="exp-icon">🌱</div>
+            <div class="exp-card">
+              <div class="exp-header">
+                <div class="exp-header-left">
+                  <div class="exp-role">UX/UI + Full-Stack Developer</div>
+                  <div class="exp-co">
+                    Asha Tech (Software House) · First Job
+                  </div>
+                  <div class="exp-short">
+                    Wore every hat before even graduating.
+                  </div>
+                </div>
+                <div class="exp-right">
+                  <div class="exp-period">2021-22 · 1 yr</div>
+                  <div class="exp-chevron">▼</div>
+                </div>
+              </div>
+              <div class="exp-body">
+                <div class="exp-body-inner">
+                  <p class="exp-full">
+                    First role at a friend's software house. Real client work
+                    from day one — UX/UI design, Angular frontend, Laravel
+                    backend, Flutter mobile, and attending client requirement
+                    meetings directly. Left after 1 year: salary was 18,000 THB
+                    but scope of work was a full team's worth.
+                  </p>
+                  <div class="exp-tags">
+                    <span class="etag">UX/UI</span
+                    ><span class="etag">Angular</span>
+                    <span class="etag">Laravel</span
+                    ><span class="etag">Flutter</span
+                    ><span class="etag">Client Meetings</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /timeline -->
+      </div>
+    </section>
 
-        <script data-cfasync="false"
-            src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── CURSOR ──
-const dot  = document.getElementById('c-dot');
-const ring = document.getElementById('c-ring');
-const SYMS = ['✿','✦','⭑','❋','🌸','◈','✾'];
-let mx=0, my=0, rx=0, ry=0, lastSpark=0;
+    <div class="wave-div"></div>
 
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    <!-- ════════════ PROJECT ════════════ -->
+    <section id="project" class="fade-up">
+      <div class="wrap">
+        <div class="tag t-pk">
+          <img
+            src="favicon.svg"
+            alt="butter"
+            style="height: 1em; vertical-align: middle; display: inline-block"
+          />
+          Side Project
+        </div>
+        <h2 class="sec-title">butterMenu</h2>
+        <p class="sec-sub">
+          better menu — but made by butter (that's me). A food platform built
+          from a real problem.
+        </p>
 
-(function loop() {
-  dot.style.left = mx + 'px';  dot.style.top = my + 'px';
-  rx += (mx - rx) * .13;  ry += (my - ry) * .13;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(loop);
-})();
+        <div
+          style="
+            background: linear-gradient(135deg, var(--pink-l), var(--yel-l));
+            border: 2.5px solid var(--line);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 5px 5px 0 var(--line);
+            margin-top: 20px;
+          "
+        >
+          <div class="proj-cards">
+            <div
+              style="
+                background: var(--white);
+                border: 2px solid var(--line);
+                border-radius: 16px;
+                padding: 20px;
+                box-shadow: 3px 3px 0 var(--line);
+              "
+            >
+              <div style="font-size: 1.5rem; margin-bottom: 8px">😤</div>
+              <div
+                style="font-weight: 900; font-size: 0.9rem; margin-bottom: 6px"
+              >
+                The Problem I Had
+              </div>
+              <p
+                style="
+                  font-size: 0.83rem;
+                  font-weight: 600;
+                  color: var(--soft);
+                  line-height: 1.65;
+                "
+              >
+                I wanted to check a restaurant's menu before going — but most
+                places don't have a website. Stuck scrolling Google Maps reviews
+                hoping someone photographed the dish I wanted.
+              </p>
+            </div>
+            <div
+              style="
+                background: var(--white);
+                border: 2px solid var(--line);
+                border-radius: 16px;
+                padding: 20px;
+                box-shadow: 3px 3px 0 var(--line);
+              "
+            >
+              <div style="font-size: 1.5rem; margin-bottom: 8px">💡</div>
+              <div
+                style="font-weight: 900; font-size: 0.9rem; margin-bottom: 6px"
+              >
+                Why I Build It This Way
+              </div>
+              <p
+                style="
+                  font-size: 0.83rem;
+                  font-weight: 600;
+                  color: var(--soft);
+                  line-height: 1.65;
+                "
+              >
+                Mom runs the restaurant alone and has knee pain — so ordering
+                via QR reduces how much she walks. That's the real success
+                metric. Not DAU. Not revenue. Just mom walking less.
+              </p>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 12px;
+            "
+          >
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <span class="etag">Next.js</span><span class="etag">Laravel</span
+              ><span class="etag">Claude AI</span
+              ><span class="etag">Docker</span
+              ><span class="etag">PostgreSQL</span>
+            </div>
+            <a
+              href="buttermenu.html"
+              style="
+                font-family: &quot;Nunito&quot;, sans-serif;
+                font-size: 0.84rem;
+                font-weight: 800;
+                background: var(--pink-d);
+                color: #fff;
+                border: 2px solid var(--pink-d);
+                border-radius: 999px;
+                padding: 10px 22px;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                box-shadow: 3px 3px 0 #cc5070;
+                transition: all 0.2s;
+              "
+              onmouseover="this.style.transform = 'translate(-2px,-2px)'"
+              onmouseout="this.style.transform = 'none'"
+              >✨ Full Case Study →</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
 
-document.addEventListener('mousemove', e => {
-  const now = Date.now();
-  if (now - lastSpark > 72) { lastSpark = now; spark(e.clientX, e.clientY); }
-});
+    <div class="wave-div"></div>
 
-function spark(x, y) {
-  const s = document.createElement('div');
-  s.className = 'spark';
-  s.textContent = SYMS[Math.floor(Math.random() * SYMS.length)];
-  s.style.cssText = `left:${x+(Math.random()-.5)*16}px;top:${y+(Math.random()-.5)*16}px;font-size:${.65+Math.random()*.55}rem;`;
-  document.body.appendChild(s);
-  setTimeout(() => s.remove(), 820);
-}
+    <!-- ════════════ TECH STACK ════════════ -->
+    <section id="techstack" class="fade-up">
+      <div class="wrap">
+        <div class="tag t-yl">⭑ Tech Stack</div>
+        <h2 class="sec-title">Tools I Love</h2>
+        <p class="sec-sub">
+          Frameworks, languages & tools I use to ship real products.
+        </p>
+        <div class="tech-grid">
+          <div class="tc c-p">
+            <div class="tc-i">🟢</div>
+            <div class="tc-n">Vue.js</div>
+          </div>
+          <div class="tc c-l">
+            <div class="tc-i">🅰️</div>
+            <div class="tc-n">Angular</div>
+          </div>
+          <div class="tc c-y">
+            <div class="tc-i">▲</div>
+            <div class="tc-n">Next.js</div>
+          </div>
+          <div class="tc c-p">
+            <div class="tc-i">🦋</div>
+            <div class="tc-n">Flutter</div>
+          </div>
+          <div class="tc c-y">
+            <div class="tc-i">🐘</div>
+            <div class="tc-n">Laravel</div>
+          </div>
+          <div class="tc c-m">
+            <div class="tc-i">🐹</div>
+            <div class="tc-n">Golang</div>
+          </div>
+          <div class="tc c-l">
+            <div class="tc-i">🔷</div>
+            <div class="tc-n">TypeScript</div>
+          </div>
+          <div class="tc c-m">
+            <div class="tc-i">🐘</div>
+            <div class="tc-n">PostgreSQL</div>
+          </div>
+          <div class="tc c-l">
+            <div class="tc-i">🐳</div>
+            <div class="tc-n">Docker</div>
+          </div>
+          <div class="tc c-p">
+            <div class="tc-i">⚙️</div>
+            <div class="tc-n">Nginx</div>
+          </div>
+          <div class="tc c-y">
+            <div class="tc-i">🎨</div>
+            <div class="tc-n">UX / UI</div>
+          </div>
+          <div class="tc c-m">
+            <div class="tc-i">⚡</div>
+            <div class="tc-n">WebSocket</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-document.addEventListener('click', e => {
-  for (let i = 0; i < 7; i++) setTimeout(() => spark(e.clientX, e.clientY), i * 40);
-});
+    <div class="wave-div"></div>
 
-// hover effect
-document.querySelectorAll('a, button, .exp-card, .tc, .pill, .stat-card').forEach(el => {
-  el.addEventListener('mouseenter', () => { dot.style.width='16px'; dot.style.height='16px'; dot.style.background='#FF5C87'; });
-  el.addEventListener('mouseleave', () => { dot.style.width='10px'; dot.style.height='10px'; dot.style.background='var(--pink-d)'; });
-});
+    <!-- ════════════ CONTACT ════════════ -->
+    <section id="contact" class="fade-up">
+      <div class="wrap">
+        <div class="contact-box">
+          <h2>Let's Work Together 🌸</h2>
+          <p>
+            Open to remote opportunities — especially in Europe. Looking for a
+            full-stack dev who ships end-to-end? Let's talk!
+          </p>
+          <div class="c-links">
+            <a href="mailto:wonrada.k@gmail.com" class="c-link">📧 Email</a>
+            <a href="https://github.com/wonrada" class="c-link" target="_blank"
+              >🐙 GitHub</a
+            >
+            <a
+              href="https://www.linkedin.com/in/wonrada-ka-ungku-b49327247/"
+              class="c-link"
+              target="_blank"
+              >💼 LinkedIn</a
+            >
+            <a href="buttermenu.html" class="c-link">✨ My Project</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// ── ACCORDION ──
-document.querySelectorAll('.exp-row').forEach(row => {
-  row.querySelector('.exp-header').addEventListener('click', () => {
-    const isOpen = row.classList.contains('open');
-    // close all
-    document.querySelectorAll('.exp-row.open').forEach(r => r.classList.remove('open'));
-    // toggle clicked
-    if (!isOpen) row.classList.add('open');
-  });
-});
+    <footer>
+      Made with 💖 by Wonrada Kaaungku · "Noei" in Thai, "Butter"
+      internationally 🧈 · butterada.dev
+    </footer>
 
-// ── NAV ACTIVE ──
-const sections = [...document.querySelectorAll('section[id]')];
-const navLinks = [...document.querySelectorAll('.nav-links a')];
-window.addEventListener('scroll', () => {
-  let id = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) id = s.id; });
-  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-});
+    <a href="#hero" id="scroll-top" aria-label="Back to top">↑</a>
 
-// ── HAMBURGER ──
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobile-nav');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileNav.classList.toggle('open');
-});
-document.querySelectorAll('.mobile-link').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileNav.classList.remove('open');
-  });
-});
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script>
+      // ── CURSOR ──
+      const dot = document.getElementById("c-dot");
+      const ring = document.getElementById("c-ring");
+      const SYMS = ["✿", "✦", "⭑", "❋", "🌸", "◈", "✾"];
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0,
+        lastSpark = 0;
 
-// ── SCROLL ANIMATIONS ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
 
-// ── SCROLL TO TOP ──
-const scrollTop = document.getElementById('scroll-top');
-window.addEventListener('scroll', () => {
-  scrollTop.classList.toggle('show', window.scrollY > 400);
-});
-</script>
-</body>
+      (function loop() {
+        dot.style.left = mx + "px";
+        dot.style.top = my + "px";
+        rx += (mx - rx) * 0.13;
+        ry += (my - ry) * 0.13;
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(loop);
+      })();
+
+      document.addEventListener("mousemove", (e) => {
+        const now = Date.now();
+        if (now - lastSpark > 72) {
+          lastSpark = now;
+          spark(e.clientX, e.clientY);
+        }
+      });
+
+      function spark(x, y) {
+        const s = document.createElement("div");
+        s.className = "spark";
+        s.textContent = SYMS[Math.floor(Math.random() * SYMS.length)];
+        s.style.cssText = `left:${x + (Math.random() - 0.5) * 16}px;top:${y + (Math.random() - 0.5) * 16}px;font-size:${0.65 + Math.random() * 0.55}rem;`;
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 820);
+      }
+
+      document.addEventListener("click", (e) => {
+        for (let i = 0; i < 7; i++)
+          setTimeout(() => spark(e.clientX, e.clientY), i * 40);
+      });
+
+      // hover effect
+      document
+        .querySelectorAll("a, button, .exp-card, .tc, .pill, .stat-card")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            dot.style.width = "16px";
+            dot.style.height = "16px";
+            dot.style.background = "#FF5C87";
+          });
+          el.addEventListener("mouseleave", () => {
+            dot.style.width = "10px";
+            dot.style.height = "10px";
+            dot.style.background = "var(--pink-d)";
+          });
+        });
+
+      // ── ACCORDION ──
+      document.querySelectorAll(".exp-row").forEach((row) => {
+        row.querySelector(".exp-header").addEventListener("click", () => {
+          const isOpen = row.classList.contains("open");
+          // close all
+          document
+            .querySelectorAll(".exp-row.open")
+            .forEach((r) => r.classList.remove("open"));
+          // toggle clicked
+          if (!isOpen) row.classList.add("open");
+        });
+      });
+
+      // ── NAV ACTIVE ──
+      const sections = [...document.querySelectorAll("section[id]")];
+      const navLinks = [...document.querySelectorAll(".nav-links a")];
+      window.addEventListener("scroll", () => {
+        let id = "";
+        sections.forEach((s) => {
+          if (window.scrollY >= s.offsetTop - 140) id = s.id;
+        });
+        navLinks.forEach((a) =>
+          a.classList.toggle("active", a.getAttribute("href") === "#" + id),
+        );
+      });
+
+      // ── HAMBURGER ──
+      const hamburger = document.getElementById("hamburger");
+      const mobileNav = document.getElementById("mobile-nav");
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        mobileNav.classList.toggle("open");
+      });
+      document.querySelectorAll(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          mobileNav.classList.remove("open");
+        });
+      });
+
+      // ── SCROLL ANIMATIONS ──
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".fade-up")
+        .forEach((el) => observer.observe(el));
+
+      // ── SCROLL TO TOP ──
+      const scrollTop = document.getElementById("scroll-top");
+      window.addEventListener("scroll", () => {
+        scrollTop.classList.toggle("show", window.scrollY > 400);
+      });
+    </script>
+  </body>
 </html>
